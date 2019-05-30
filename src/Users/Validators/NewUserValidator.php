@@ -22,7 +22,7 @@ class NewUserValidator extends AbstractValidator
     protected function rules(): array
     {
         return [
-            'organisation_id' => ['required', 'string', 'size:6', $this->organisationExists],
+            'organisation_id' => ['required', 'numeric', $this->organisationExists],
             'forename'        => ['required', 'string', 'min:2', 'max:20'],
             'surname'         => ['required', 'string', 'min:2', 'max:20'],
             'email'           => ['required', 'email', $this->uniqueEmail->uniqueTo($this->data['organisation_id'])],

@@ -3,64 +3,68 @@
 namespace Deviate\Activities\Repositories;
 
 use Deviate\Activities\Contracts\Repositories\InvitationsRepositoryInterface;
+use Deviate\Activities\Models\Eloquent\Invitation;
 use Deviate\Shared\Repositories\AbstractRepository;
-use Illuminate\Support\Facades\DB;
 
 class InvitationsRepository extends AbstractRepository implements InvitationsRepositoryInterface
 {
-    public function inviteUserToActivity(string $userId, string $activityId): bool
+    private $invitation;
+
+    public function __construct(Invitation $invitation)
     {
-        return (bool) DB::table('activity_user')->insert([
-            'activity_id' => $this->decode($activityId),
-            'user_id'     => $this->decode($userId),
-            'status'      => 'invited',
-            'created_at'  => now()->format('Y-m-d H:i:s'),
-            'updated_at'  => now()->format('Y-m-d H:i:s'),
+        $this->invitation = $invitation;
+    }
+
+    public function inviteUserToActivity(int $userId, int $activityId): bool
+    {
+        return (bool) $this->invitation->newQuery()->create([
+            'activity_id' => $activityId,
+            'user_id'     => $userId,
         ]);
     }
 
-    public function updateToBooked(string $userId, string $activityId): bool
+    public function updateToBooked(int $userId, int $activityId): bool
     {
-        return (bool) DB::table('activity_user')->where([
-            'user_id'     => $this->decode($userId),
-            'activity_id' => $this->decode($activityId),
-        ])->update([
-            'status'     => 'booked',
-            'updated_at' => now()->format('Y-m-d H:i:s'),
-        ]);
+        return (bool) $this->invitation->newQuery()
+            ->where([
+                'activity_id' => $activityId,
+                'user_id'     => $userId,
+            ])
+            ->firstOrFail()
+            ->update([
+                'status' => 'booked',
+            ]);
     }
 
-    public function uninviteUserFromActivity(string $userId, string $activityId): bool
+    public function uninviteUserFromActivity(int $userId, int $activityId): bool
     {
-        return (bool) DB::table('activity_user')->where([
-            'activity_id' => $this->decode($activityId),
-            'user_id'     => $this->decode($userId),
-            'status'      => 'invited',
+        return $this->invitation->newQuery()->where([
+            'activity_id' => $activityId,
+            'user_id'     => $userId,
         ])->delete();
     }
 
-    public function isUserInvitedToActivity(string $userId, string $activityId): bool
+    public function isUserInvitedToActivity(int $userId, int $activityId): bool
     {
-        return DB::table('activity_user')->where([
-            'activity_id' => $this->decode($activityId),
-            'user_id'     => $this->decode($userId),
-            'status'      => 'invited',
+        return $this->invitation->newQuery()->where([
+            'activity_id' => $activityId,
+            'user_id'     => $userId,
         ])->exists();
     }
 
-    public function listInvitedUsers(string $activityId): array
+    public function listInvitedUsers(int $activityId): array
     {
-        return DB::table('activity_user')->where([
-            'activity_id' => $this->decode($activityId),
-            'status'      => 'invited',
-        ])->pluck('user_id')->toArray();
+        return $this->invitation->newQuery()
+            ->where('activity_id', $activityId)
+            ->pluck('user_id')
+            ->toArray();
     }
 
-    public function listActivitiesInvitedTo(string $userId): array
+    public function listActivitiesInvitedTo(int $userId): array
     {
-        return DB::table('activity_user')->where([
-            'activity_id' => $this->decode($userId),
-            'status'      => 'invited',
-        ])->pluck('activity_id')->toArray();
+        return $this->invitation->newQuery()
+            ->where('user_id', $userId)
+            ->pluck('activity_id')
+            ->toArray();
     }
 }

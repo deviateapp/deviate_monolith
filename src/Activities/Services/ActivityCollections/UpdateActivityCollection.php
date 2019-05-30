@@ -23,7 +23,7 @@ class UpdateActivityCollection implements UpdateActivityCollectionInterface
         $this->validator    = $validator;
     }
 
-    public function updateById(string $collectionId, array $data): array
+    public function updateById(int $collectionId, array $data): array
     {
         $this->validator->validate($data);
 

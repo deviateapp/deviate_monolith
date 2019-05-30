@@ -13,7 +13,7 @@ class CreateActivityTest extends TestCase
         /** @var ActivityCollection $collection */
         $collection = ActivityCollection::find(1);
 
-        $response = $this->activitiesClient->create($this->encode(1), [
+        $response = $this->activitiesClient->create(1, [
             'name'                   => 'Test Activity',
             'description'            => 'This is a test activity, this is a test activity, this is a test activity',
             'starts_at'              => $collection->activities_start_at->format('Y-m-d'),
@@ -27,8 +27,8 @@ class CreateActivityTest extends TestCase
         $response->assertSuccessful();
 
         $response->assertContains([
-            'organisation_id'        => $this->encode(1),
-            'activity_collection_id' => $this->encode(1),
+            'organisation_id'        => 1,
+            'activity_collection_id' => 1,
             'name'                   => 'Test Activity',
             'description'            => 'This is a test activity, this is a test activity, this is a test activity',
             'starts_at'              => $collection->activities_start_at->format('Y-m-d'),
@@ -56,7 +56,7 @@ class CreateActivityTest extends TestCase
     /** @test */
     public function it_returns_an_error_if_the_collection_cannot_be_found()
     {
-        $response = $this->activitiesClient->create($this->encode(999), []);
+        $response = $this->activitiesClient->create(999, []);
 
         $response->assertException([
             'status' => 422,
@@ -67,7 +67,7 @@ class CreateActivityTest extends TestCase
     /** @test */
     public function it_returns_an_error_if_the_data_provided_is_invalid()
     {
-        $response = $this->activitiesClient->create($this->encode(1), []);
+        $response = $this->activitiesClient->create(1, []);
 
         $response->assertException([
             'status' => 422,
@@ -81,7 +81,7 @@ class CreateActivityTest extends TestCase
         /** @var ActivityCollection $collection */
         $collection = ActivityCollection::find(1);
 
-        $response = $this->activitiesClient->create($this->encode(1), [
+        $response = $this->activitiesClient->create(1, [
             'name'                   => 'Test Activity',
             'description'            => 'This is a test activity, this is a test activity, this is a test activity',
             'starts_at'              => $collection->activities_start_at->subDay()->format('Y-m-d'),
@@ -102,7 +102,7 @@ class CreateActivityTest extends TestCase
         /** @var ActivityCollection $collection */
         $collection = ActivityCollection::find(1);
 
-        $response = $this->activitiesClient->create($this->encode(1), [
+        $response = $this->activitiesClient->create(1, [
             'name'                   => 'Test Activity',
             'description'            => 'This is a test activity, this is a test activity, this is a test activity',
             'starts_at'              => $collection->activities_start_at->format('Y-m-d'),

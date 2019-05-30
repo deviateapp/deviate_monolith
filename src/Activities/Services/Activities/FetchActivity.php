@@ -23,7 +23,7 @@ class FetchActivity implements FetchActivityInterface
          return $this->repository->search($this->normalizer->normalize($search));
     }
 
-    public function fetchById(string $activityId): array
+    public function fetchById(int $activityId): array
     {
         return $this->repository->fetchById($activityId);
     }

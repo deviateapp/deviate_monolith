@@ -21,7 +21,7 @@ class FetchAvatarsRepository extends AbstractRepository implements FetchAvatarsR
         $this->transformer = $transformer;
     }
 
-    public function fetchAvatarByUserId(string $userId): array
+    public function fetchAvatarByUserId(int $userId): array
     {
         /** @var Avatar $avatar */
         $avatar = $this->avatar->newQuery()->where('user_id', $userId)->firstOrFail();
@@ -29,7 +29,7 @@ class FetchAvatarsRepository extends AbstractRepository implements FetchAvatarsR
         return $this->transformer->transform($avatar);
     }
 
-    public function hasAvatar(string $userId): bool
+    public function hasAvatar(int $userId): bool
     {
         return (bool) $this->avatar->newQuery()->where('user_id', $userId)->exists();
     }

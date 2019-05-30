@@ -6,6 +6,6 @@ use Deviate\Shared\Responses\Clients\ApiResponseInterface;
 
 interface BookingsClientInterface
 {
-    public function book(string $userId, string $activityId, bool $force = false): ApiResponseInterface;
-    public function unbook(string $userId, string $activityId, bool $force = false): ApiResponseInterface;
+    public function book(int $userId, int $activityId, bool $force = false): ApiResponseInterface;
+    public function unbook(int $userId, int $activityId, bool $force = false): ApiResponseInterface;
 }

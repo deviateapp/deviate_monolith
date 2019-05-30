@@ -16,7 +16,7 @@ class BookActivityTest extends TestCase
             'booking_starts_at' => now()->subDay(),
         ]);
 
-        $response = $this->bookingsClient->book($this->encode(1), $this->encode(1));
+        $response = $this->bookingsClient->book(1, 1);
 
         $response->assertSuccessful();
 
@@ -32,7 +32,7 @@ class BookActivityTest extends TestCase
     /** @test */
     public function an_error_is_returned_if_the_user_cant_be_found_when_booking()
     {
-        $response = $this->bookingsClient->book($this->encode(999), $this->encode(1));
+        $response = $this->bookingsClient->book(999, 1);
 
         $response->assertException([
             'status' => 404,
@@ -42,7 +42,7 @@ class BookActivityTest extends TestCase
     /** @test */
     public function an_error_is_returned_if_the_activity_cant_be_found_when_booking()
     {
-        $response = $this->bookingsClient->book($this->encode(1), $this->encode(999));
+        $response = $this->bookingsClient->book(1, 999);
 
         $response->assertException([
             'status' => 404,
@@ -56,7 +56,7 @@ class BookActivityTest extends TestCase
             'booking_starts_at' => now()->addDays(2)->format('Y-m-d 00:00:00'),
         ]);
 
-        $response = $this->bookingsClient->book($this->encode(1), $this->encode(1));
+        $response = $this->bookingsClient->book(1, 1);
 
         $response->assertException([
             'status' => 409,
@@ -66,7 +66,7 @@ class BookActivityTest extends TestCase
     /** @test */
     public function a_user_can_be_force_booked_onto_an_activity_anytime_before_the_activity_starts()
     {
-        $response = $this->bookingsClient->book($this->encode(1), $this->encode(1), true);
+        $response = $this->bookingsClient->book(1, 1, true);
 
         $response->assertSuccessful();
 
@@ -86,7 +86,7 @@ class BookActivityTest extends TestCase
             'status'      => 'booked',
         ]);
 
-        $response = $this->bookingsClient->book($this->encode(1), $this->encode(1), true);
+        $response = $this->bookingsClient->book(1, 1, true);
 
         $response->assertException([
             'status' => 400,
@@ -103,7 +103,7 @@ class BookActivityTest extends TestCase
             'status'      => 'booked',
         ]);
 
-        $response = $this->bookingsClient->book($this->encode(1), $this->encode(2), true);
+        $response = $this->bookingsClient->book(1, 2, true);
 
         $response->assertException([
             'status' => 409,
@@ -121,7 +121,7 @@ class BookActivityTest extends TestCase
             'booking_starts_at' => now()->subDay(),
         ]);
 
-        $response = $this->bookingsClient->book($this->encode(1), $this->encode(1));
+        $response = $this->bookingsClient->book(1, 1);
 
         $response->assertException([
             'status' => 409,
@@ -147,7 +147,7 @@ class BookActivityTest extends TestCase
             'booking_starts_at' => now()->subDay(),
         ]);
 
-        $response = $this->bookingsClient->book($this->encode(1), $this->encode(1));
+        $response = $this->bookingsClient->book(1, 1);
 
         $response->assertSuccessful();
 

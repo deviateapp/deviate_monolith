@@ -16,12 +16,12 @@ class DeleteAvatarsRepository extends AbstractRepository implements DeleteAvatar
         $this->avatar = $avatar;
     }
 
-    public function deleteAvatarByUserId(string $userId): bool
+    public function deleteAvatarByUserId(int $userId): bool
     {
         return (bool) $this->avatar->newQuery()->where('user_id', $userId)->delete();
     }
 
-    public function deleteAvatarsByOrganisationId(string $organisationId): bool
+    public function deleteAvatarsByOrganisationId(int $organisationId): bool
     {
         return (bool) $this->avatar->newQuery()->where('organisation_id', $organisationId)->forceDelete();
     }

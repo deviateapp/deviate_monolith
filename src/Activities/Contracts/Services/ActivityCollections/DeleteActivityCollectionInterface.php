@@ -4,5 +4,5 @@ namespace Deviate\Activities\Contracts\Services\ActivityCollections;
 
 interface DeleteActivityCollectionInterface
 {
-    public function deleteById(string $collectionId): void;
+    public function deleteById(int $collectionId): void;
 }

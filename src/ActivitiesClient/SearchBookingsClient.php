@@ -13,7 +13,7 @@ use Deviate\Shared\Search\SearchContainerInterface;
 class SearchBookingsClient extends AbstractClient implements SearchBookingsClientInterface
 {
     public function listBookedUsers(
-        string $activityId,
+        int $activityId,
         SearchContainerInterface $search
     ): ApiPaginatedResponseInterface {
         return $this->call('activities.bookings.search.users_on_activity', [
@@ -23,7 +23,7 @@ class SearchBookingsClient extends AbstractClient implements SearchBookingsClien
     }
 
     public function listBookedActivities(
-        string $userId,
+        int $userId,
         SearchContainerInterface $search
     ): ApiPaginatedResponseInterface {
         return $this->call('activities.bookings.search.activities_for_user', [

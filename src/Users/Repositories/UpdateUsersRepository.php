@@ -17,13 +17,13 @@ class UpdateUsersRepository extends AbstractRepository implements UpdateUsersRep
         $this->user = $user;
     }
 
-    public function updateUserById(string $id, array $details): bool
+    public function updateUserById(int $id, array $details): bool
     {
-        $user = $this->user->newQuery()->withTrashed()->findOrFail($this->decode($id))->toArray();
+        $user = $this->user->newQuery()->withTrashed()->findOrFail($id)->toArray();
 
         $data = array_merge($user, $details);
 
-        return (bool) $this->user->newQuery()->withTrashed()->findOrFail($this->decode($id))->update([
+        return (bool) $this->user->newQuery()->withTrashed()->findOrFail($id)->update([
             'forename'       => $data['forename'],
             'surname'        => $data['surname'],
             'email'          => $data['email'],
@@ -33,7 +33,7 @@ class UpdateUsersRepository extends AbstractRepository implements UpdateUsersRep
         ]);
     }
 
-    public function updateActivationById(string $id, bool $isActive): bool
+    public function updateActivationById(int $id, bool $isActive): bool
     {
         return $this->updateUserById($id, [
             'deleted_at' => $isActive ? null : Carbon::now(),

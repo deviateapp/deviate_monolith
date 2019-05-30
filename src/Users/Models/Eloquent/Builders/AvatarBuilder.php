@@ -2,7 +2,6 @@
 
 namespace Deviate\Users\Models\Eloquent\Builders;
 
-use Deviate\Shared\Traits\ConvertsHashIds;
 use Deviate\Shared\Traits\Models\StandardBuilderMethods;
 use Deviate\Users\Exceptions\UserNotFoundException;
 use Illuminate\Database\Eloquent\Builder;
@@ -10,12 +9,11 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class AvatarBuilder extends Builder
 {
-    use ConvertsHashIds,
-        StandardBuilderMethods;
+    use StandardBuilderMethods;
 
-    public function forUser(string $userId): Builder
+    public function forUser(int $userId): Builder
     {
-        return $this->where('user_id', $this->decode($userId));
+        return $this->where('user_id', $userId);
     }
 
     protected function throwNotFoundException(ModelNotFoundException $exception)

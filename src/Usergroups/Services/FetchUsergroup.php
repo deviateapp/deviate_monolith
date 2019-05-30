@@ -25,7 +25,7 @@ class FetchUsergroup implements FetchUsergroupInterface
         return $this->fetchesUsergroups->search($this->normalizer->normalize($search));
     }
 
-    public function fetchById(string $id): array
+    public function fetchById(int $id): array
     {
         return $this->fetchesUsergroups->fetchById($id);
     }

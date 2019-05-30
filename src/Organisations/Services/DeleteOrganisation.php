@@ -15,7 +15,7 @@ class DeleteOrganisation implements DeleteOrganisationInterface
         $this->deletesOrganisations = $deletesOrganisations;
     }
 
-    public function deleteByOrganisationId(string $id): void
+    public function deleteByOrganisationId(int $id): void
     {
         $this->deletesOrganisations->deleteOrganisationById($id);
     }

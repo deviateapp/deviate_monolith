@@ -13,13 +13,13 @@ class FetchActivityTest extends TestCase
         /** @var Activity $activity */
         $activity = Activity::find(1);
 
-        $response = $this->activitiesClient->fetchById($this->encode(1));
+        $response = $this->activitiesClient->fetchById(1);
 
         $response->assertSuccessful();
 
         $response->assertContains([
-            'organisation_id'        => $this->encode(1),
-            'activity_collection_id' => $this->encode(1),
+            'organisation_id'        => 1,
+            'activity_collection_id' => 1,
             'name'                   => 'Paintballing',
             'description'            => 'This is a test paintballing activity',
             'starts_at'              => $activity->starts_at->format('Y-m-d'),

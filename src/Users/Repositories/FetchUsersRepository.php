@@ -35,12 +35,12 @@ class FetchUsersRepository implements FetchUsersRepositoryInterface
         return $this->transformer->transform($user);
     }
 
-    public function fetchPasswordById(string $id): string
+    public function fetchPasswordById(int $id): string
     {
         return $this->user->newQuery()->withTrashed()->findOrFail($id)->password;
     }
 
-    public function fetchUserById(string $id): array
+    public function fetchUserById(int $id): array
     {
         $user = $this->user->newQuery()->withTrashed()->findOrFail($id);
 

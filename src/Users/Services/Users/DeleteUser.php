@@ -20,7 +20,7 @@ class DeleteUser implements DeleteUserInterface
         $this->deletesUsers = $deletesUsers;
     }
 
-    public function deleteUser(string $userId): void
+    public function deleteUser(int $userId): void
     {
         $user = $this->fetchesUsers->fetchUserById($userId);
 

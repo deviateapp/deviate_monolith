@@ -25,7 +25,7 @@ class InviteUser implements InviteUserInterface
         $this->fetchesActivities    = $fetchesActivities;
     }
 
-    public function inviteUserToActivity(string $userId, string $activityId): void
+    public function inviteUserToActivity(int $userId, int $activityId): void
     {
         $user     = $this->fetchesUsers->fetchUserById($userId)->rethrow();
         $activity = $this->fetchesActivities->fetchById($activityId)->rethrow();

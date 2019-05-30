@@ -14,7 +14,7 @@ class DeleteActivityCollection implements DeleteActivityCollectionInterface
         $this->repository = $repository;
     }
 
-    public function deleteById(string $collectionId): void
+    public function deleteById(int $collectionId): void
     {
         $this->repository->deleteById($collectionId);
     }

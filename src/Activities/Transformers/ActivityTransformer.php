@@ -2,7 +2,6 @@
 
 namespace Deviate\Activities\Transformers;
 
-use Deviate\Shared\Traits\ConvertsHashIds;
 use Deviate\Shared\Transformers\CanTransformSearchResults;
 use Deviate\Shared\Transformers\TransformerInterface;
 use Deviate\Shared\Transformers\TransformsCollections;
@@ -10,17 +9,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class ActivityTransformer implements TransformerInterface
 {
-    use ConvertsHashIds,
-        TransformsCollections,
+    use TransformsCollections,
         CanTransformSearchResults;
 
     public function transform(Model $model): array
     {
         /** @var \Deviate\Activities\Models\Eloquent\Activity $model */
         return [
-            'id'                     => $this->encode($model->id),
-            'organisation_id'        => $this->encode($model->organisation_id),
-            'activity_collection_id' => $this->encode($model->activity_collection_id),
+            'id'                     => $model->id,
+            'organisation_id'        => $model->organisation_id,
+            'activity_collection_id' => $model->activity_collection_id,
             'name'                   => $model->name,
             'description'            => $model->description,
             'starts_at'              => $model->starts_at->format('Y-m-d'),

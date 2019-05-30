@@ -30,7 +30,7 @@ class ListBookedActivitiesTest extends TestCase
         $container = new SearchContainer();
         $container->perPage(5)->forPage(1);
 
-        $response = $this->searchBookingsClient->listBookedActivities($this->encode(1), $container);
+        $response = $this->searchBookingsClient->listBookedActivities(1, $container);
 
         $response->assertSuccessful();
 
@@ -40,7 +40,7 @@ class ListBookedActivitiesTest extends TestCase
             'total_records' => 1,
         ]);
 
-        $response->assertPaginatedResultsContainIdsInOrder($this->encode(1));
+        $response->assertPaginatedResultsContainIdsInOrder(1);
     }
 
     /** @test */
@@ -48,7 +48,7 @@ class ListBookedActivitiesTest extends TestCase
     {
         $container = new SearchContainer;
 
-        $response = $this->searchBookingsClient->listBookedActivities($this->encode(999), $container);
+        $response = $this->searchBookingsClient->listBookedActivities(999, $container);
 
         $response->assertException([
             'status' => 404,

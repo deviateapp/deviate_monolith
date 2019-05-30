@@ -11,7 +11,7 @@ class NewActivityCollectionValidator extends AbstractValidator
 {
     private $organisationExists;
     private $validationRules = [
-        'organisation_id'     => ['required', 'string', 'size:6'],
+        'organisation_id'     => ['required', 'numeric'],
         'name'                => ['required', 'string', 'min:3', 'max:50'],
         'description'         => ['required', 'string', 'min:10', 'max:500'],
         'booking_starts_at'   => ['required', 'date_format:Y-m-d H:i:s', 'before:booking_ends_at'],

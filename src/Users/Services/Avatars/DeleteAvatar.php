@@ -28,7 +28,7 @@ class DeleteAvatar implements DeleteAvatarInterface
         $this->createAvatar   = $createAvatar;
     }
 
-    public function deleteByUserId(string $userId): void
+    public function deleteByUserId(int $userId): void
     {
         $this->deletesAvatars->deleteAvatarByUserId($userId);
 

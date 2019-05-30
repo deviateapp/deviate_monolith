@@ -15,8 +15,7 @@ use Illuminate\Foundation\Testing\Assert as PHPUnit;
 
 abstract class TestCase extends BaseTestCase
 {
-    use ConvertsHashIds,
-        CreatesApplication,
+    use CreatesApplication,
         DatabaseMigrations;
 
     protected function setUp(): void

@@ -5,12 +5,9 @@ namespace Deviate\Activities\Events;
 use Deviate\Activities\Contracts\Events\InvitationsEventSubscriberInterface;
 use Deviate\Activities\Contracts\Services\Invitations\InviteUserInterface;
 use Deviate\Shared\Events\AbstractEventSubscriber;
-use Deviate\Shared\Traits\ConvertsHashIds;
 
 class InvitationsEventSubscriber extends AbstractEventSubscriber implements InvitationsEventSubscriberInterface
 {
-    use ConvertsHashIds;
-
     protected $events = [
         'activities.invite'                                  => 'handleInvite',
         'activities.uninvite'                                => 'handleUninvite',

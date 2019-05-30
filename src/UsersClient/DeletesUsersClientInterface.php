@@ -6,5 +6,5 @@ use Deviate\Shared\Responses\Clients\ApiResponseInterface;
 
 interface DeletesUsersClientInterface
 {
-    public function deleteUser(string $userId): ApiResponseInterface;
+    public function deleteUser(int $userId): ApiResponseInterface;
 }

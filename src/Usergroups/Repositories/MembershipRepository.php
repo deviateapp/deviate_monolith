@@ -16,56 +16,50 @@ class MembershipRepository extends AbstractRepository implements MembershipRepos
         $this->database = $database;
     }
 
-    public function join(string $userId, string $usergroupId): bool
+    public function join(int $userId, int $usergroupId): bool
     {
         return (bool) $this->database->table('user_usergroup')
             ->insert([
-                'user_id'      => $this->decode($userId),
-                'usergroup_id' => $this->decode($usergroupId),
+                'user_id'      => $userId,
+                'usergroup_id' => $usergroupId,
             ]);
     }
 
-    public function remove(string $userId, string $usergroupId): bool
+    public function remove(int $userId, int $usergroupId): bool
     {
         return (bool) $this->database->table('user_usergroup')
-            ->where('user_id', $this->decode($userId))
-            ->where('usergroup_id', $this->decode($usergroupId))
+            ->where('user_id', $userId)
+            ->where('usergroup_id', $usergroupId)
             ->delete();
     }
 
-    public function removeByUsergroupId(string $usergroupId): bool
+    public function removeByUsergroupId(int $usergroupId): bool
     {
         return (bool) $this->database->table('user_usergroup')
-            ->where('usergroup_id', $this->decode($usergroupId))
+            ->where('usergroup_id', $usergroupId)
             ->delete();
     }
 
-    public function removeByUserId(string $userId): bool
+    public function removeByUserId(int $userId): bool
     {
         return (bool) $this->database->table('user_usergroup')
-            ->where('user_id', $this->decode($userId))
+            ->where('user_id', $userId)
             ->delete();
     }
 
-    public function listMembers(string $usergroupId): array
+    public function listMembers(int $usergroupId): array
     {
         return $this->database->table('user_usergroup')
-            ->where('usergroup_id', $this->decode($usergroupId))
+            ->where('usergroup_id', $usergroupId)
             ->pluck('user_id')
-            ->map(function ($id) {
-                return $this->encode($id);
-            })
             ->toArray();
     }
 
-    public function listUsergroupsMemberOf(string $userId): array
+    public function listUsergroupsMemberOf(int $userId): array
     {
         return $this->database->table('user_usergroup')
-            ->where('user_id', $this->decode($userId))
+            ->where('user_id', $userId)
             ->pluck('usergroup_id')
-            ->map(function ($id) {
-                return $this->encode($id);
-            })
             ->toArray();
     }
 }

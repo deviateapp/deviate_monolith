@@ -21,12 +21,12 @@ class FetchUser implements FetchUserInterface
         $this->normalizer   = $normalizer;
     }
 
-    public function fetchById(string $id): array
+    public function fetchById(int $id): array
     {
         return $this->fetchesUsers->fetchUserById($id);
     }
 
-    public function fetchByRememberToken(string $organisationId, string $token): array
+    public function fetchByRememberToken(int $organisationId, string $token): array
     {
         return $this->fetchesUsers->fetchUserByCredentials([
             'organisation_id' => $organisationId,

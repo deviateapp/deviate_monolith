@@ -31,7 +31,7 @@ class CreateAvatar implements CreateAvatarInterface
         $this->factory        = $factory;
     }
 
-    public function createDefaultAvatar(string $userId): array
+    public function createDefaultAvatar(int $userId): array
     {
         $this->fetchesUsers->fetchUserById($userId);
 

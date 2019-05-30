@@ -15,7 +15,7 @@ class UpdateUsergroupsRepository extends AbstractRepository implements UpdateUse
         $this->usergroup = $usergroup;
     }
 
-    public function updateUsergroupById(string $id, array $data): bool
+    public function updateUsergroupById(int $id, array $data): bool
     {
         $usergroup = $this->usergroup->newQuery()->findOrFail($id)->toArray();
         $data      = array_merge($usergroup, $data);

@@ -4,5 +4,5 @@ namespace Deviate\Activities\Contracts\Services\Bookings;
 
 interface BookActivityInterface
 {
-    public function bookUserOnActivity(string $userId, string $activityId, bool $force): void;
+    public function bookUserOnActivity(int $userId, int $activityId, bool $force): void;
 }

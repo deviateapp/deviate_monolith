@@ -10,7 +10,7 @@ class UpdateActivityCollectionTest extends TestCase
     /** @test */
     public function it_can_update_a_collections_details()
     {
-        $response = $this->collectionsClient->updateCollection($this->encode(2), [
+        $response = $this->collectionsClient->updateCollection(2, [
             'name'                => 'Updated collection',
             'description'         => 'This is an updated collection',
             'booking_starts_at'   => '2021-01-01 00:00:00',
@@ -39,7 +39,7 @@ class UpdateActivityCollectionTest extends TestCase
     /** @test */
     public function it_returns_an_error_if_the_collection_cannot_be_found()
     {
-        $response = $this->collectionsClient->updateCollection($this->encode(999), []);
+        $response = $this->collectionsClient->updateCollection(999, []);
 
         $response->assertException([
             'status' => 404,
@@ -49,7 +49,7 @@ class UpdateActivityCollectionTest extends TestCase
     /** @test */
     public function it_returns_a_validation_error_if_the_data_is_invalid()
     {
-        $response = $this->collectionsClient->updateCollection($this->encode(1), [
+        $response = $this->collectionsClient->updateCollection(1, [
             'name'        => 'A',
             'description' => 'B',
         ]);
@@ -63,7 +63,7 @@ class UpdateActivityCollectionTest extends TestCase
     /** @test */
     public function when_updating_dates_all_dates_must_be_provided()
     {
-        $response = $this->collectionsClient->updateCollection($this->encode(1), [
+        $response = $this->collectionsClient->updateCollection(1, [
             'booking_starts_at' => '2018-12-31 23:59:59',
         ]);
 
@@ -85,7 +85,7 @@ class UpdateActivityCollectionTest extends TestCase
         /** @var ActivityCollection $collection */
         $collection = ActivityCollection::find(1);
 
-        $response = $this->collectionsClient->updateCollection($this->encode(1), [
+        $response = $this->collectionsClient->updateCollection(1, [
             'name' => 'Test Activity',
         ]);
 

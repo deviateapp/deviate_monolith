@@ -10,7 +10,7 @@ class InviteToActivityTest extends TestCase
     /** @test */
     public function it_can_invite_a_user_to_an_activity()
     {
-        $response = $this->invitationsClient->invite($this->encode(1), $this->encode(1));
+        $response = $this->invitationsClient->invite(1, 1);
 
         $response->assertSuccessful();
 
@@ -26,7 +26,7 @@ class InviteToActivityTest extends TestCase
     /** @test */
     public function it_returns_an_error_if_the_user_to_invite_cant_be_found()
     {
-        $response = $this->invitationsClient->invite($this->encode(999), $this->encode(1));
+        $response = $this->invitationsClient->invite(999, 1);
 
         $response->assertException([
             'status' => 404,
@@ -36,7 +36,7 @@ class InviteToActivityTest extends TestCase
     /** @test */
     public function it_returns_an_error_if_the_activity_to_invite_to_cant_be_found()
     {
-        $response = $this->invitationsClient->invite($this->encode(1), $this->encode(999));
+        $response = $this->invitationsClient->invite(1, 999);
 
         $response->assertException([
             'status' => 404,
@@ -54,7 +54,7 @@ class InviteToActivityTest extends TestCase
             'updated_at'  => now()->format('Y-m-d H:i:s'),
         ]);
 
-        $response = $this->invitationsClient->invite($this->encode(1), $this->encode(1));
+        $response = $this->invitationsClient->invite(1, 1);
 
         $response->assertException([
             'status' => 400,

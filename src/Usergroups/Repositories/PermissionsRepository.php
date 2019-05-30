@@ -39,7 +39,7 @@ class PermissionsRepository extends AbstractRepository implements PermissionsRep
         return $this->permissionSectionTransformer->transformCollection($sections->get());
     }
 
-    public function permissionsForUsergroup(string $usergroupId): array
+    public function permissionsForUsergroup(int $usergroupId): array
     {
         $permissions = $this->usergroup->newQuery()->findOrFail($usergroupId)->permissions;
 

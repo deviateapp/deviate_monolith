@@ -17,13 +17,13 @@ class CreateOrganisationsRepository extends AbstractRepository implements Create
         $this->organisation = $organisation;
     }
 
-    public function createOrganisation(array $data): string
+    public function createOrganisation(array $data): int
     {
         $organisation = $this->organisation->newQuery()->create([
             'name' => $data['name'],
             'slug' => Slug::format($data['slug'] ?? $data['name']),
         ]);
 
-        return $this->encode($organisation->id);
+        return $organisation->id;
     }
 }

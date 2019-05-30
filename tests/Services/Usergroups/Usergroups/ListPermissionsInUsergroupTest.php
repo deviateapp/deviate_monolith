@@ -13,7 +13,7 @@ class ListPermissionsInUsergroupTest extends TestCase
     {
         Usergroup::find(2)->permissions()->save(Permission::find(1));
 
-        $response = $this->permissionsClient->listPermissionsInUsergroup($this->encode(2));
+        $response = $this->permissionsClient->listPermissionsInUsergroup(2);
 
         $response->assertSuccessful();
 
@@ -30,7 +30,7 @@ class ListPermissionsInUsergroupTest extends TestCase
     /** @test */
     public function it_returns_an_error_if_the_usergroup_cant_be_found()
     {
-        $response = $this->permissionsClient->listPermissionsInUsergroup($this->encode(999));
+        $response = $this->permissionsClient->listPermissionsInUsergroup(999);
 
         $response->assertException([
             'status' => 404,

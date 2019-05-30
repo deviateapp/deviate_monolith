@@ -4,5 +4,5 @@ namespace Deviate\Users\Contracts\Services\Users;
 
 interface DeleteUserInterface
 {
-    public function deleteUser(string $userId): void;
+    public function deleteUser(int $userId): void;
 }

@@ -14,7 +14,7 @@ class PermissionsClient extends AbstractClient implements PermissionsClientInter
         ]);
     }
 
-    public function listPermissionsInUsergroup(string $usergroupId): ApiResponseInterface
+    public function listPermissionsInUsergroup(int $usergroupId): ApiResponseInterface
     {
         return $this->call('permissions.list.for_usergroup_id', [
             'id' => $usergroupId,

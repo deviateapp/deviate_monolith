@@ -4,6 +4,6 @@ namespace Deviate\Usergroups\Contracts\Services;
 
 interface UpdateUsergroupInterface
 {
-    public function updateByUsergroupId(string $id, array $data): array;
-    public function applyPermissions(string $id, array $permissions): void;
+    public function updateByUsergroupId(int $id, array $data): array;
+    public function applyPermissions(int $id, array $permissions): void;
 }

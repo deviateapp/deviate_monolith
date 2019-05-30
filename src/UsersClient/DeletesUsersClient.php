@@ -9,7 +9,7 @@ use Deviate\Shared\Responses\Clients\ApiResponseInterface;
 
 class DeletesUsersClient extends AbstractClient implements DeletesUsersClientInterface
 {
-    public function deleteUser(string $userId): ApiResponseInterface
+    public function deleteUser(int $userId): ApiResponseInterface
     {
         return $this->call('users.authentication.delete', [
             'id' => $userId,

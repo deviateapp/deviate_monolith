@@ -6,13 +6,10 @@ use Deviate\Activities\BookingPreconditions\PreconditionChecker;
 use Deviate\Activities\Client\ActivitiesClientInterface;
 use Deviate\Activities\Contracts\Repositories\BookingsRepositoryInterface;
 use Deviate\Activities\Contracts\Services\Bookings\BookActivityInterface;
-use Deviate\Shared\Traits\ConvertsHashIds;
 use Deviate\Users\Client\FetchesUsersClientInterface;
 
 class BookActivity implements BookActivityInterface
 {
-    use ConvertsHashIds;
-
     private $bookingsRepository;
     private $fetchesUsers;
     private $fetchesActivities;
@@ -31,7 +28,7 @@ class BookActivity implements BookActivityInterface
         $this->preconditionChecker = $preconditionChecker;
     }
 
-    public function bookUserOnActivity(string $userId, string $activityId, bool $force = false): void
+    public function bookUserOnActivity(int $userId, int $activityId, bool $force = false): void
     {
         $user     = $this->fetchesUsers->fetchUserById($userId)->rethrow();
         $activity = $this->fetchesActivities->fetchById($activityId)->rethrow();

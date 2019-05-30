@@ -19,7 +19,7 @@ class UsergroupPermissionsRepository extends AbstractRepository implements Userg
         $this->permission = $permission;
     }
 
-    public function applyPermissions(string $usergroupId, RequestedPermissionsCollection $permissions): bool
+    public function applyPermissions(int $usergroupId, RequestedPermissionsCollection $permissions): bool
     {
         /** @var \Illuminate\Support\Collection $permissionRecords */
         $permissionRecords = $this->permission->newQuery()->forRequestedPermissions($permissions);
@@ -32,7 +32,7 @@ class UsergroupPermissionsRepository extends AbstractRepository implements Userg
         return true;
     }
 
-    public function removeAllPermissions(string $usergroupId): bool
+    public function removeAllPermissions(int $usergroupId): bool
     {
         /** @var Usergroup $usergroup */
         $usergroup = $this->usergroup->newQuery()->findOrFail($usergroupId);

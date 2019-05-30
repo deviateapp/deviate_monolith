@@ -11,11 +11,11 @@ class FetchUserTest extends TestCase
     /** @test */
     public function it_can_return_a_user_by_their_id()
     {
-        $response = $this->fetchesUsersClient->fetchUserById($this->encode(1));
+        $response = $this->fetchesUsersClient->fetchUserById(1);
 
         $response->assertContains([
-            'id'              => $this->encode(1),
-            'organisation_id' => $this->encode(1),
+            'id'              => 1,
+            'organisation_id' => 1,
             'forename'        => 'Brody',
             'surname'         => 'Cross',
             'email'           => 'brody@deviate.test',
@@ -27,7 +27,7 @@ class FetchUserTest extends TestCase
     /** @test */
     public function it_returns_an_error_if_the_user_cant_be_found()
     {
-        $response = $this->fetchesUsersClient->fetchUserById($this->encode(999));
+        $response = $this->fetchesUsersClient->fetchUserById(999);
 
         $response->assertException([
             'status' => 404,
@@ -39,10 +39,10 @@ class FetchUserTest extends TestCase
     {
         $token = User::find(1)->remember_token;
 
-        $response = $this->fetchesUsersClient->fetchUserByRememberToken($this->encode(1), $token);
+        $response = $this->fetchesUsersClient->fetchUserByRememberToken(1, $token);
 
         $response->assertContains([
-            'id' => $this->encode(1),
+            'id' => 1,
         ]);
     }
 }

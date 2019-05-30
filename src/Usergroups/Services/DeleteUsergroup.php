@@ -20,7 +20,7 @@ class DeleteUsergroup implements DeleteUsergroupInterface
         $this->membership        = $membership;
     }
 
-    public function deleteById(string $id): void
+    public function deleteById(int $id): void
     {
         $this->membership->removeByUsergroupId($id);
 

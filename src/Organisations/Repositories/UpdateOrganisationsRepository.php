@@ -17,7 +17,7 @@ class UpdateOrganisationsRepository extends AbstractRepository implements Update
         $this->organisation = $organisation;
     }
 
-    public function updateOrganisationById(string $id, array $data): bool
+    public function updateOrganisationById(int $id, array $data): bool
     {
         $organisation = $this->organisation->newQuery()->findOrFail($id)->toArray();
         $data         = array_merge($organisation, $data);

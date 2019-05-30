@@ -8,9 +8,9 @@ use Deviate\Shared\Search\SearchContainerInterface;
 
 interface MembershipClientInterface
 {
-    public function join(string $userId, string $usergroupId): ApiResponseInterface;
-    public function remove(string $userId, string $usergroupId): ApiResponseInterface;
-    public function removeByUserId(string $userId): ApiResponseInterface;
-    public function removeByUsergroupId(string $usergroupId): ApiResponseInterface;
-    public function listMembers(string $usergroupId, ?SearchContainerInterface $search): ApiPaginatedResponseInterface;
+    public function join(int $userId, int $usergroupId): ApiResponseInterface;
+    public function remove(int $userId, int $usergroupId): ApiResponseInterface;
+    public function removeByUserId(int $userId): ApiResponseInterface;
+    public function removeByUsergroupId(int $usergroupId): ApiResponseInterface;
+    public function listMembers(int $usergroupId, ?SearchContainerInterface $search): ApiPaginatedResponseInterface;
 }

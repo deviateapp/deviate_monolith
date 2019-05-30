@@ -11,7 +11,7 @@ class UserActivationTest extends TestCase
     /** @test */
     public function an_active_user_can_be_disabled()
     {
-        $response = $this->updatesUsersClient->deactivateUser($this->encode(1));
+        $response = $this->updatesUsersClient->deactivateUser(1);
 
         $response->assertContains([
             'disabled_at' => Carbon::now()->format('Y-m-d H:i:s'),
@@ -25,7 +25,7 @@ class UserActivationTest extends TestCase
     /** @test */
     public function it_returns_an_error_if_the_user_cant_be_found()
     {
-        $response = $this->updatesUsersClient->deactivateUser($this->encode(999));
+        $response = $this->updatesUsersClient->deactivateUser(999);
 
         $response->assertException([
             'status' => 404,
@@ -37,7 +37,7 @@ class UserActivationTest extends TestCase
     {
         User::find(1)->update(['deleted_at' => Carbon::now()]);
 
-        $response = $this->updatesUsersClient->reactivateUser($this->encode(1));
+        $response = $this->updatesUsersClient->reactivateUser(1);
 
         $this->assertDatabaseHas('users', [
             'id'         => 1,

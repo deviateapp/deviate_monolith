@@ -11,7 +11,7 @@ class CreateDefaultAvatarTest extends TestCase
     /** @test */
     public function it_can_create_a_default_avatar_for_a_user()
     {
-        $response = $this->avatarsClient->addDefaultAvatar($this->encode(1));
+        $response = $this->avatarsClient->addDefaultAvatar(1);
 
         Storage::disk('avatars')->assertExists($response->get('path'));
 
@@ -24,7 +24,7 @@ class CreateDefaultAvatarTest extends TestCase
     /** @test */
     public function it_returns_an_error_if_the_user_cant_be_found()
     {
-        $response = $this->avatarsClient->addDefaultAvatar($this->encode(999));
+        $response = $this->avatarsClient->addDefaultAvatar(999);
 
         $response->assertException([
             'status' => 404,
@@ -36,7 +36,7 @@ class CreateDefaultAvatarTest extends TestCase
     {
         $existing = factory(Avatar::class)->create(['user_id' => 1]);
 
-        $response = $this->avatarsClient->addDefaultAvatar($this->encode(1));
+        $response = $this->avatarsClient->addDefaultAvatar(1);
 
         $response->assertSuccessful();
 

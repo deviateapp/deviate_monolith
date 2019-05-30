@@ -11,7 +11,7 @@ use Deviate\Shared\Search\SearchContainerInterface;
 
 class MembershipClient extends AbstractClient implements MembershipClientInterface
 {
-    public function join(string $userId, string $usergroupId): ApiResponseInterface
+    public function join(int $userId, int $usergroupId): ApiResponseInterface
     {
         return $this->call('usergroups.membership.join', [
             'user_id'      => $userId,
@@ -19,7 +19,7 @@ class MembershipClient extends AbstractClient implements MembershipClientInterfa
         ]);
     }
 
-    public function remove(string $userId, string $usergroupId): ApiResponseInterface
+    public function remove(int $userId, int $usergroupId): ApiResponseInterface
     {
         return $this->call('usergroups.membership.remove', [
             'user_id'      => $userId,
@@ -27,21 +27,21 @@ class MembershipClient extends AbstractClient implements MembershipClientInterfa
         ]);
     }
 
-    public function removeByUserId(string $userId): ApiResponseInterface
+    public function removeByUserId(int $userId): ApiResponseInterface
     {
         return $this->call('usergroups.membership.remove.user_id', [
             'id' => $userId,
         ]);
     }
 
-    public function removeByUsergroupId(string $usergroupId): ApiResponseInterface
+    public function removeByUsergroupId(int $usergroupId): ApiResponseInterface
     {
         return $this->call('usergroups.membership.remove.usergroup_id', [
             'id' => $usergroupId,
         ]);
     }
 
-    public function listMembers(string $usergroupId, ?SearchContainerInterface $search): ApiPaginatedResponseInterface
+    public function listMembers(int $usergroupId, ?SearchContainerInterface $search): ApiPaginatedResponseInterface
     {
         $search = $search ?? new SearchContainer;
 

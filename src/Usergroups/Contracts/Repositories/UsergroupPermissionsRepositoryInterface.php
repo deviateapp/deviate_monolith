@@ -6,6 +6,6 @@ use Deviate\Usergroups\Collections\RequestedPermissionsCollection;
 
 interface UsergroupPermissionsRepositoryInterface
 {
-    public function applyPermissions(string $usergroupId, RequestedPermissionsCollection $permissions): bool;
-    public function removeAllPermissions(string $usergroupId): bool;
+    public function applyPermissions(int $usergroupId, RequestedPermissionsCollection $permissions): bool;
+    public function removeAllPermissions(int $usergroupId): bool;
 }

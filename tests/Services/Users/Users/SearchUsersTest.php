@@ -25,13 +25,7 @@ class SearchUsersTest extends TestCase
             'total_records' => 7,
         ]);
 
-        $response->assertPaginatedResultsContainIdsInOrder(
-            $this->encode(7),
-            $this->encode(5),
-            $this->encode(4),
-            $this->encode(6),
-            $this->encode(1)
-        );
+        $response->assertPaginatedResultsContainIdsInOrder(7, 5, 4, 6, 1);
     }
 
     /** @test */
@@ -48,7 +42,7 @@ class SearchUsersTest extends TestCase
             'total_records' => 7,
         ]);
 
-        $response->assertPaginatedResultsContainIdsInOrder($this->encode(7), $this->encode(5));
+        $response->assertPaginatedResultsContainIdsInOrder(7, 5);
     }
 
     /** @test */
@@ -63,7 +57,7 @@ class SearchUsersTest extends TestCase
             'current_page' => 2,
         ]);
 
-        $response->assertPaginatedResultsContainIdsInOrder($this->encode(5));
+        $response->assertPaginatedResultsContainIdsInOrder(5);
     }
 
     /** @test */
@@ -74,15 +68,7 @@ class SearchUsersTest extends TestCase
 
         $response = $this->searchClient->search($container);
 
-        $response->assertPaginatedResultsContainIdsInOrder(
-            $this->encode(7), // Alfie
-            $this->encode(1), // Brody
-            $this->encode(5), // Jayne
-            $this->encode(3), // Lisa
-            $this->encode(4), // Neil
-            $this->encode(6), // Neve
-            $this->encode(2)  // Phil
-        );
+        $response->assertPaginatedResultsContainIdsInOrder(7, 1, 5, 3, 4, 6, 2);
     }
 
     /** @test */
@@ -93,7 +79,7 @@ class SearchUsersTest extends TestCase
 
         $response = $this->searchClient->search($container);
 
-        $response->assertPaginatedResultsContainIdsInOrder($this->encode(7), $this->encode(5));
+        $response->assertPaginatedResultsContainIdsInOrder(7, 5);
     }
 
     /** @test */
@@ -104,7 +90,7 @@ class SearchUsersTest extends TestCase
 
         $response = $this->searchClient->search($container);
 
-        $response->assertPaginatedResultsContainIdsInOrder($this->encode(7), $this->encode(5));
+        $response->assertPaginatedResultsContainIdsInOrder(7, 5);
     }
 
     /** @test */
@@ -119,10 +105,6 @@ class SearchUsersTest extends TestCase
             'total_records' => 3,
         ]);
 
-        $response->assertPaginatedResultsContainIdsInOrder(
-            $this->encode(1),
-            $this->encode(3),
-            $this->encode(2)
-        );
+        $response->assertPaginatedResultsContainIdsInOrder(1, 3, 2);
     }
 }

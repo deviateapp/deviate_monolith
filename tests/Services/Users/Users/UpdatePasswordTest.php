@@ -11,7 +11,7 @@ class UpdatePasswordTest extends TestCase
     /** @test */
     public function it_can_update_a_users_password()
     {
-        $response = $this->updatesUsersClient->updatePassword($this->encode(1), 'updatedpassword');
+        $response = $this->updatesUsersClient->updatePassword(1, 'updatedpassword');
 
         $response->assertSuccessful();
 
@@ -21,7 +21,7 @@ class UpdatePasswordTest extends TestCase
     /** @test */
     public function it_returns_an_error_if_the_user_cant_be_found()
     {
-        $response = $this->updatesUsersClient->updatePassword($this->encode(999), 'updatedpassword');
+        $response = $this->updatesUsersClient->updatePassword(999, 'updatedpassword');
 
         $response->assertException([
             'status' => 404,
@@ -31,7 +31,7 @@ class UpdatePasswordTest extends TestCase
     /** @test */
     public function it_returns_an_error_if_the_password_is_invalid()
     {
-        $response = $this->updatesUsersClient->updatePassword($this->encode(1), 'a');
+        $response = $this->updatesUsersClient->updatePassword(1, 'a');
 
         $response->assertException([
             'status' => 422,

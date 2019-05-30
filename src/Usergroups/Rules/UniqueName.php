@@ -10,10 +10,10 @@ class UniqueName implements Rule
     /** @var FetchUsergroupsRepositoryInterface */
     private $fetchesUsergroups;
 
-    /** @var string */
+    /** @var int */
     private $ignoreId;
 
-    /** @var string */
+    /** @var int */
     private $organisationId;
 
     public function __construct(FetchUsergroupsRepositoryInterface $fetchesUsergroups)
@@ -21,14 +21,14 @@ class UniqueName implements Rule
         $this->fetchesUsergroups = $fetchesUsergroups;
     }
 
-    public function ignore(?string $ignoreId = null): UniqueName
+    public function ignore(?int $ignoreId = null): UniqueName
     {
         $this->ignoreId = $ignoreId;
 
         return $this;
     }
 
-    public function forOrganisation(?string $organisationId): UniqueName
+    public function forOrganisation(?int $organisationId): UniqueName
     {
         $this->organisationId = $organisationId;
 

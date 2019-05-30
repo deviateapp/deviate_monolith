@@ -7,7 +7,7 @@ use Deviate\Shared\Responses\Clients\ApiResponseInterface;
 
 class BookingsClient extends AbstractClient implements BookingsClientInterface
 {
-    public function book(string $userId, string $activityId, bool $force = false): ApiResponseInterface
+    public function book(int $userId, int $activityId, bool $force = false): ApiResponseInterface
     {
         return $this->call('activities.book', [
             'user_id'       => $userId,
@@ -16,7 +16,7 @@ class BookingsClient extends AbstractClient implements BookingsClientInterface
         ]);
     }
 
-    public function unbook(string $userId, string $activityId, bool $force = false): ApiResponseInterface
+    public function unbook(int $userId, int $activityId, bool $force = false): ApiResponseInterface
     {
         return $this->call('activities.unbook', [
             'user_id'         => $userId,

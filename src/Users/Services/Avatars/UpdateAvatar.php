@@ -23,7 +23,7 @@ class UpdateAvatar implements UpdateAvatarInterface
         $this->validator = $validator;
     }
 
-    public function uploadNewAvatar(string $userId, UploadedFile $file): array
+    public function uploadNewAvatar(int $userId, UploadedFile $file): array
     {
         $this->validator->validate([
             'avatar' => $file,

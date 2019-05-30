@@ -16,7 +16,7 @@ class DeleteOrganisationsRepository extends AbstractRepository implements Delete
         $this->organisation = $organisation;
     }
 
-    public function deleteOrganisationById(string $id): void
+    public function deleteOrganisationById(int $id): void
     {
         $this->organisation->newQuery()->findOrFail($id)->delete();
     }

@@ -28,7 +28,7 @@ class UserValidation implements UserValidationInterface
         $this->hasher       = $hasher;
     }
 
-    public function validatePassword(string $userId, string $password): array
+    public function validatePassword(int $userId, string $password): array
     {
         $storedPassword = $this->fetchesUsers->fetchPasswordById($userId);
 
@@ -37,7 +37,7 @@ class UserValidation implements UserValidationInterface
         ];
     }
 
-    public function modifyActivation(string $userId, bool $isActive): array
+    public function modifyActivation(int $userId, bool $isActive): array
     {
         $this->updatesUsers->updateActivationById($userId, $isActive);
 

@@ -12,7 +12,7 @@ class DeleteAvatarTest extends TestCase
     {
         $avatar = factory(Avatar::class)->create(['user_id' => 1]);
 
-        $response = $this->avatarsClient->deleteAvatar($this->encode(1));
+        $response = $this->avatarsClient->deleteAvatar(1);
 
         $response->assertSuccessful();
 
@@ -27,7 +27,7 @@ class DeleteAvatarTest extends TestCase
     {
         factory(Avatar::class)->create(['user_id' => 1]);
 
-        $response = $this->avatarsClient->deleteAvatar($this->encode(1));
+        $response = $this->avatarsClient->deleteAvatar(1);
 
         $response->assertSuccessful();
 

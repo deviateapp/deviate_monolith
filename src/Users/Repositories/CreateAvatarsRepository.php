@@ -29,7 +29,7 @@ class CreateAvatarsRepository extends AbstractRepository implements CreateAvatar
         $this->avatar         = $avatar;
     }
 
-    public function recordNewAvatar(string $userId, string $path): bool
+    public function recordNewAvatar(int $userId, string $path): bool
     {
         $user = $this->fetchesUsers->fetchUserById($userId);
 
@@ -37,7 +37,7 @@ class CreateAvatarsRepository extends AbstractRepository implements CreateAvatar
 
         return (bool) $this->avatar->newQuery()->create([
             'organisation_id' => $user['organisation_id'],
-            'user_id'         => $this->decode($userId),
+            'user_id'         => $userId,
             'path'            => $path,
         ]);
     }

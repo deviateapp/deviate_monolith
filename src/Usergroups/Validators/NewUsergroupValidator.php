@@ -22,7 +22,7 @@ class NewUsergroupValidator extends AbstractValidator
     protected function rules(): array
     {
         return [
-            'organisation_id' => ['required', 'string', 'size:6', $this->organisationExists],
+            'organisation_id' => ['required', 'numeric', $this->organisationExists],
             'name'            => [
                 'required',
                 'string',

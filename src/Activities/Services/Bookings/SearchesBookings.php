@@ -33,7 +33,7 @@ class SearchesBookings implements SearchesBookingsInterface
         $this->searchesActivities = $searchesActivities;
     }
 
-    public function listBookedUsers(string $activityId, SearchContainerInterface $search): array
+    public function listBookedUsers(int $activityId, SearchContainerInterface $search): array
     {
         $this->fetchesActivities->fetchById($activityId)->rethrow();
 
@@ -44,7 +44,7 @@ class SearchesBookings implements SearchesBookingsInterface
         return $this->searchesUsers->search($search)->toArray();
     }
 
-    public function listActivitiesBooked(string $userId, SearchContainerInterface $search): array
+    public function listActivitiesBooked(int $userId, SearchContainerInterface $search): array
     {
         $this->fetchesUsers->fetchUserById($userId)->rethrow();
 

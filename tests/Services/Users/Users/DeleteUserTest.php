@@ -13,7 +13,7 @@ class DeleteUserTest extends TestCase
     {
         User::find(1)->update(['deleted_at' => Carbon::now()]);
 
-        $response = $this->deletesUsersClient->deleteUser($this->encode(1));
+        $response = $this->deletesUsersClient->deleteUser(1);
 
         $response->assertSuccessful();
 
@@ -25,7 +25,7 @@ class DeleteUserTest extends TestCase
     /** @test */
     public function it_returns_an_error_if_the_user_doesnt_exist()
     {
-        $response = $this->deletesUsersClient->deleteUser($this->encode(999));
+        $response = $this->deletesUsersClient->deleteUser(999);
 
         $response->assertException([
             'status' => 404,
@@ -35,7 +35,7 @@ class DeleteUserTest extends TestCase
     /** @test */
     public function it_returns_an_error_if_the_user_is_not_disabled_before_trying_to_delete()
     {
-        $response = $this->deletesUsersClient->deleteUser($this->encode(1));
+        $response = $this->deletesUsersClient->deleteUser(1);
 
         $response->assertException([
             'status' => 409,

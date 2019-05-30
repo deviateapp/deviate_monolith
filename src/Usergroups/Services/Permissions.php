@@ -19,7 +19,7 @@ class Permissions implements PermissionsInterface
         return $this->repository->sections($includePermissions);
     }
 
-    public function listPermissionsInUsergroup(string $usergroupId): array
+    public function listPermissionsInUsergroup(int $usergroupId): array
     {
         return $this->repository->permissionsForUsergroup($usergroupId);
     }

@@ -7,7 +7,7 @@ use Deviate\Shared\Responses\Clients\ApiResponseInterface;
 
 class InvitationsClient extends AbstractClient implements InvitationsClientInterface
 {
-    public function invite(string $userId, string $activityId): ApiResponseInterface
+    public function invite(int $userId, int $activityId): ApiResponseInterface
     {
         return $this->call('activities.invite', [
             'user_id'     => $userId,
@@ -15,7 +15,7 @@ class InvitationsClient extends AbstractClient implements InvitationsClientInter
         ]);
     }
 
-    public function uninvite(string $userId, string $activityId): ApiResponseInterface
+    public function uninvite(int $userId, int $activityId): ApiResponseInterface
     {
         return $this->call('activities.uninvite', [
             'user_id'     => $userId,

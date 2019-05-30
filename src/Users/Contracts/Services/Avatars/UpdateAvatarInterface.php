@@ -6,5 +6,5 @@ use Illuminate\Http\UploadedFile;
 
 interface UpdateAvatarInterface
 {
-    public function uploadNewAvatar(string $userId, UploadedFile $content): array;
+    public function uploadNewAvatar(int $userId, UploadedFile $content): array;
 }

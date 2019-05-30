@@ -9,7 +9,7 @@ class UpdatePermissionsTest extends TestCase
     /** @test */
     public function it_can_update_the_permissions_for_a_usergroup()
     {
-        $response = $this->usergroupsClient->applyPermissions($this->encode(2), [
+        $response = $this->usergroupsClient->applyPermissions(2, [
             [
                 'key'               => 'test.permission',
                 'must_own_resource' => true,
@@ -38,7 +38,7 @@ class UpdatePermissionsTest extends TestCase
     /** @test */
     public function it_removes_permissions_that_dont_exist_from_being_updated()
     {
-        $response = $this->usergroupsClient->applyPermissions($this->encode(2), [
+        $response = $this->usergroupsClient->applyPermissions(2, [
             [
                 'key' => 'invalid.permission',
             ],
@@ -54,7 +54,7 @@ class UpdatePermissionsTest extends TestCase
     /** @test */
     public function non_ownable_permissions_are_always_set_to_false()
     {
-        $response = $this->usergroupsClient->applyPermissions($this->encode(2), [
+        $response = $this->usergroupsClient->applyPermissions(2, [
             [
                 'key'               => 'test.permission.unownable',
                 'must_own_resource' => true,
@@ -73,7 +73,7 @@ class UpdatePermissionsTest extends TestCase
     /** @test */
     public function it_returns_an_error_if_the_usergroup_cant_be_found()
     {
-        $response = $this->usergroupsClient->applyPermissions($this->encode(999), []);
+        $response = $this->usergroupsClient->applyPermissions(999, []);
 
         $response->assertException([
             'status' => 404,
@@ -83,7 +83,7 @@ class UpdatePermissionsTest extends TestCase
     /** @test */
     public function it_returns_an_error_if_the_data_isnt_formatted_correctly()
     {
-        $response = $this->usergroupsClient->applyPermissions($this->encode(2), [
+        $response = $this->usergroupsClient->applyPermissions(2, [
             [
                 'foo_key'           => 'test.permission',
                 'must_own_resource' => true,

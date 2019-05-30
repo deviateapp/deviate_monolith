@@ -41,7 +41,7 @@ class UpdateUser implements UpdateUserInterface
         $this->coreDetailsValidator = $coreDetailsValidator;
     }
 
-    public function updatePasswordById(string $id, string $password): void
+    public function updatePasswordById(int $id, string $password): void
     {
         $this->passwordValidator->validate([
             'password' => $password,
@@ -52,14 +52,14 @@ class UpdateUser implements UpdateUserInterface
         ]);
     }
 
-    public function updateRememberTokenById(string $id, ?string $token): void
+    public function updateRememberTokenById(int $id, ?string $token): void
     {
         $this->updatesUsers->updateUserById($id, [
             'remember_token' => $token,
         ]);
     }
 
-    public function updateCoreDetailsById(string $id, array $data): array
+    public function updateCoreDetailsById(int $id, array $data): array
     {
         $user = $this->fetchesUsers->fetchUserById($id);
 

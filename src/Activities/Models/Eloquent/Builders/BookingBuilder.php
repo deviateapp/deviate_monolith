@@ -10,13 +10,11 @@ use Illuminate\Support\Arr;
 
 class BookingBuilder extends Builder
 {
-    use StandardBuilderMethods {
-        StandardBuilderMethods::create as baseCreate;
-    }
+    use StandardBuilderMethods;
 
     public function create(array $attributes = [])
     {
-        return $this->baseCreate(
+        return parent::create(
             Arr::only($attributes, ['activity_id', 'user_id']) + ['status' => 'booked']
         );
     }

@@ -29,7 +29,7 @@ class BookingsRepository extends AbstractRepository implements BookingsRepositor
         $this->invitationsRepository = $invitationsRepository;
     }
 
-    public function bookUserOnActivity(string $userId, string $activityId): bool
+    public function bookUserOnActivity(int $userId, int $activityId): bool
     {
         if ($this->invitationsRepository->isUserInvitedToActivity($userId, $activityId)) {
             return $this->invitationsRepository->updateToBooked($userId, $activityId);
@@ -43,7 +43,7 @@ class BookingsRepository extends AbstractRepository implements BookingsRepositor
         return true;
     }
 
-    public function unbookUserFromActivity(string $userId, string $activityId): bool
+    public function unbookUserFromActivity(int $userId, int $activityId): bool
     {
         return $this->booking->newQuery()->where([
             'user_id'     => $userId,
@@ -51,7 +51,7 @@ class BookingsRepository extends AbstractRepository implements BookingsRepositor
         ])->delete();
     }
 
-    public function isUserBookedOnActivity(string $userId, string $activityId): bool
+    public function isUserBookedOnActivity(int $userId, int $activityId): bool
     {
         return $this->booking->newQuery()->where([
             'activity_id' => $activityId,
@@ -59,7 +59,7 @@ class BookingsRepository extends AbstractRepository implements BookingsRepositor
         ])->exists();
     }
 
-    public function listBookedUsers(string $activityId): array
+    public function listBookedUsers(int $activityId): array
     {
         return $this->booking->newQuery()
             ->where('activity_id', $activityId)
@@ -67,7 +67,7 @@ class BookingsRepository extends AbstractRepository implements BookingsRepositor
             ->toArray();
     }
 
-    public function listBookedActivities(string $userId): array
+    public function listBookedActivities(int $userId): array
     {
         return $this->booking->newQuery()
             ->where('user_id', $userId)
@@ -75,7 +75,7 @@ class BookingsRepository extends AbstractRepository implements BookingsRepositor
             ->toArray();
     }
 
-    public function isFreeForActivity(string $userId, string $activityId): bool
+    public function isFreeForActivity(int $userId, int $activityId): bool
     {
         $activity = $this->activitiesRepository->fetchById($activityId);
 

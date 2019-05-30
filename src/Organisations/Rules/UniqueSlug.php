@@ -10,7 +10,7 @@ class UniqueSlug implements Rule
     /** @var FetchOrganisationsRepositoryInterface */
     private $fetchesOrganisations;
 
-    /** @var string */
+    /** @var int */
     private $ignoreId;
 
     /** @var bool */
@@ -28,7 +28,7 @@ class UniqueSlug implements Rule
         return $this;
     }
 
-    public function ignore(?string $ignoreId = null): UniqueSlug
+    public function ignore(?int $ignoreId = null): UniqueSlug
     {
         $this->ignoreId = $ignoreId;
 

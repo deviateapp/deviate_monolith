@@ -11,7 +11,7 @@ class CreateUsergroupTest extends TestCase
     public function it_can_create_a_new_usergroup()
     {
         $response = $this->usergroupsClient->createUsergroup([
-            'organisation_id' => $this->encode(1),
+            'organisation_id' => 1,
             'name'            => 'Test Usergroup',
             'description'     => 'This is a test usergroup',
             'is_supergroup'   => true,
@@ -48,7 +48,7 @@ class CreateUsergroupTest extends TestCase
     public function it_returns_an_error_if_the_organisation_doesnt_exist()
     {
         $response = $this->usergroupsClient->createUsergroup([
-            'organisation_id' => $this->encode(999),
+            'organisation_id' => 999,
             'name'            => 'Test Usergroup',
             'description'     => 'This is a test usergroup',
         ]);
@@ -63,7 +63,7 @@ class CreateUsergroupTest extends TestCase
     public function it_returns_an_error_if_the_usergroup_name_already_exists_for_the_organisation()
     {
         $response = $this->usergroupsClient->createUsergroup([
-            'organisation_id' => $this->encode(1),
+            'organisation_id' => 1,
             'name'            => 'Network Administrators',
             'description'     => 'Test usergroup',
         ]);

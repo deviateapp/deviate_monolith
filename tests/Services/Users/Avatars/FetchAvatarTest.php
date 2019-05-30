@@ -13,10 +13,10 @@ class FetchAvatarTest extends TestCase
     {
         $avatar = factory(Avatar::class)->create(['user_id' => 1]);
 
-        $response = $this->avatarsClient->fetchAvatar($this->encode(1));
+        $response = $this->avatarsClient->fetchAvatar(1);
 
         $response->assertContains([
-            'user_id'    => $this->encode(1),
+            'user_id'    => 1,
             'path'       => $avatar->path,
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
@@ -27,7 +27,7 @@ class FetchAvatarTest extends TestCase
     /** @test */
     public function it_returns_an_error_if_the_user_cant_be_found()
     {
-        $response = $this->avatarsClient->fetchAvatar($this->encode(999));
+        $response = $this->avatarsClient->fetchAvatar(999);
 
         $response->assertException([
             'status' => 404,

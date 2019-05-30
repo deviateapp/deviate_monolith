@@ -6,10 +6,10 @@ use Deviate\Shared\Responses\Clients\ApiResponseInterface;
 
 interface UsergroupsClientInterface
 {
-    public function fetchUsergroup(string $id): ApiResponseInterface;
+    public function fetchUsergroup(int $id): ApiResponseInterface;
     public function createUsergroup(array $data): ApiResponseInterface;
-    public function updateUsergroup(string $id, array $data): ApiResponseInterface;
-    public function deleteUsergroup(string $id): ApiResponseInterface;
+    public function updateUsergroup(int $id, array $data): ApiResponseInterface;
+    public function deleteUsergroup(int $id): ApiResponseInterface;
 
-    public function applyPermissions(string $usergroupId, array $permissions): ApiResponseInterface;
+    public function applyPermissions(int $usergroupId, array $permissions): ApiResponseInterface;
 }

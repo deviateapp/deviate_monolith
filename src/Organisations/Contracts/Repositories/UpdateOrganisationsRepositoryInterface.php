@@ -4,5 +4,5 @@ namespace Deviate\Organisations\Contracts\Repositories;
 
 interface UpdateOrganisationsRepositoryInterface
 {
-    public function updateOrganisationById(string $id, array $data): bool;
+    public function updateOrganisationById(int $id, array $data): bool;
 }

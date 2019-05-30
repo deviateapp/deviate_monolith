@@ -11,10 +11,10 @@ class UniqueEmail implements Rule
     /** @var FetchUsersRepositoryInterface */
     private $fetchesUsers;
 
-    /** @var string */
+    /** @var int */
     private $organisationId;
 
-    /** @var string */
+    /** @var int */
     private $excludingUserId;
 
     public function __construct(FetchUsersRepositoryInterface $fetchesUsers)
@@ -22,14 +22,14 @@ class UniqueEmail implements Rule
         $this->fetchesUsers = $fetchesUsers;
     }
 
-    public function uniqueTo(?string $organisationId): UniqueEmail
+    public function uniqueTo(?int $organisationId): UniqueEmail
     {
         $this->organisationId = $organisationId;
 
         return $this;
     }
 
-    public function excluding(string $id): UniqueEmail
+    public function excluding(int $id): UniqueEmail
     {
         $this->excludingUserId = $id;
 

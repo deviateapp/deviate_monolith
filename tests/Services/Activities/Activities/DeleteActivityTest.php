@@ -9,7 +9,7 @@ class DeleteActivityTest extends TestCase
     /** @test */
     public function an_activity_can_be_deleted()
     {
-        $response = $this->activitiesClient->delete($this->encode(1));
+        $response = $this->activitiesClient->delete(1);
 
         $response->assertSuccessful();
 
@@ -21,7 +21,7 @@ class DeleteActivityTest extends TestCase
     /** @test */
     public function it_returns_an_error_if_the_activity_cant_be_found()
     {
-        $response = $this->activitiesClient->delete($this->encode(999));
+        $response = $this->activitiesClient->delete(999);
 
         $response->assertException([
             'status' => 404,

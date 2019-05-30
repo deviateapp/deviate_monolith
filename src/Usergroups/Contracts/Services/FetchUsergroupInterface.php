@@ -4,5 +4,5 @@ namespace Deviate\Usergroups\Contracts\Services;
 
 interface FetchUsergroupInterface
 {
-    public function fetchById(string $id): array;
+    public function fetchById(int $id): array;
 }

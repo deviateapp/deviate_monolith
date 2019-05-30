@@ -11,12 +11,12 @@ use Illuminate\Contracts\Validation\Validator as ValidatorContract;
 
 class NewActivityValidator extends AbstractValidator
 {
-    private $startDate;
-    private $endDate;
+    private $starts;
+    private $ends;
     private $collectionExists;
 
     private $rules = [
-        'activity_collection_id' => ['required', 'string', 'size:6'],
+        'activity_collection_id' => ['required', 'numeric'],
         'name'                   => ['required', 'string', 'min:3', 'max:50'],
         'description'            => ['required', 'string', 'min:50'],
         'starts_at'              => [
@@ -36,20 +36,20 @@ class NewActivityValidator extends AbstractValidator
     ];
 
     public function __construct(
-        ActivityStartDate $startDate,
-        ActivityEndDate $endDate,
+        ActivityStartDate $starts,
+        ActivityEndDate $ends,
         ActivityCollectionExists $collectionExists
     ) {
-        $this->startDate        = $startDate;
-        $this->endDate          = $endDate;
+        $this->starts           = $starts;
+        $this->ends             = $ends;
         $this->collectionExists = $collectionExists;
     }
 
     protected function rules(): array
     {
         $this->rules['activity_collection_id'][] = $this->collectionExists;
-        $this->rules['starts_at'][] = $this->startDate->forCollection($this->data['activity_collection_id']);
-        $this->rules['ends_at'][] = $this->endDate->forCollection($this->data['activity_collection_id']);
+        $this->rules['starts_at'][]              = $this->starts->forCollection($this->data['activity_collection_id']);
+        $this->rules['ends_at'][]                = $this->ends->forCollection($this->data['activity_collection_id']);
 
         return $this->rules;
     }

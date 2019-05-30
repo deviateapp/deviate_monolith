@@ -12,10 +12,10 @@ class CreateUsergroupsRepository extends AbstractRepository implements CreateUse
 
     public function __construct(Usergroup $usergroup)
     {
-        $this->usergroup   = $usergroup;
+        $this->usergroup = $usergroup;
     }
 
-    public function createUsergroup(array $data): string
+    public function createUsergroup(array $data): int
     {
         /** @var Usergroup $usergroup */
         $usergroup = $this->usergroup->newQuery()->create([
@@ -25,6 +25,6 @@ class CreateUsergroupsRepository extends AbstractRepository implements CreateUse
             'is_supergroup'   => $data['is_supergroup'] ?? false,
         ]);
 
-        return $this->encode($usergroup->id);
+        return $usergroup->id;
     }
 }

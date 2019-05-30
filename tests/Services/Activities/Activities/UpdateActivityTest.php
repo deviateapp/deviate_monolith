@@ -13,7 +13,7 @@ class UpdateActivityTest extends TestCase
         /** @var Activity $activity */
         $activity = Activity::find(1);
 
-        $response = $this->activitiesClient->updateDetails($this->encode(1), [
+        $response = $this->activitiesClient->updateDetails(1, [
             'name'           => 'Test Activity',
             'description'    => 'This is a test activity, this is a test activity, this is a test activity',
             'starts_at'      => $activity->starts_at->addDay()->format('Y-m-d'),
@@ -53,7 +53,7 @@ class UpdateActivityTest extends TestCase
     /** @test */
     public function it_returns_an_error_if_the_activity_cant_be_found()
     {
-        $response = $this->activitiesClient->updateDetails($this->encode(999), []);
+        $response = $this->activitiesClient->updateDetails(999, []);
 
         $response->assertException([
             'status' => 404,
@@ -66,7 +66,7 @@ class UpdateActivityTest extends TestCase
         /** @var Activity $activity */
         $activity = Activity::find(1);
 
-        $response = $this->activitiesClient->updateDetails($this->encode(1), [
+        $response = $this->activitiesClient->updateDetails(1, [
             'name'        => 'Test Activity',
             'description' => 'This is a test activity, this is a test activity, this is a test activity',
         ]);
@@ -89,7 +89,7 @@ class UpdateActivityTest extends TestCase
     /** @test */
     public function it_returns_a_validation_error_if_the_data_is_invalid()
     {
-        $response = $this->activitiesClient->updateDetails($this->encode(1), [
+        $response = $this->activitiesClient->updateDetails(1, [
             'name'           => 'A',
             'description'    => 'B',
             'starts_at'      => '2019-01-',

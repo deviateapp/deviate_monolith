@@ -8,12 +8,12 @@ use Deviate\Shared\Search\SearchContainerInterface;
 interface SearchBookingsClientInterface
 {
     public function listBookedUsers(
-        string $activityId,
+        int $activityId,
         SearchContainerInterface $search
     ): ApiPaginatedResponseInterface;
 
     public function listBookedActivities(
-        string $userId,
+        int $userId,
         SearchContainerInterface $search
     ): ApiPaginatedResponseInterface;
 }

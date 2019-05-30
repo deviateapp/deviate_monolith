@@ -38,7 +38,7 @@ class FetchOrganisationsRepository extends AbstractRepository implements FetchOr
         return $this->transformer->transform($organisation);
     }
 
-    public function fetchOrganisationById(string $id): array
+    public function fetchOrganisationById(int $id): array
     {
         /** @var Organisation $organisation */
         $organisation = $this->organisation->newQuery()->findOrFail($id);
@@ -46,7 +46,7 @@ class FetchOrganisationsRepository extends AbstractRepository implements FetchOr
         return $this->transformer->transform($organisation);
     }
 
-    public function isSlugRegistered(string $slug, ?string $ignoreId = null): bool
+    public function isSlugRegistered(string $slug, ?int $ignoreId = null): bool
     {
         return $this->organisation->newQuery()
             ->whereSlug(Slug::format($slug))

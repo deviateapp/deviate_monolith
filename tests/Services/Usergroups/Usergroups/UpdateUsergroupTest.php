@@ -11,7 +11,7 @@ class UpdateUsergroupTest extends TestCase
     /** @test */
     public function a_usergroup_can_be_updated()
     {
-        $response = $this->usergroupsClient->updateUsergroup($this->encode(2), [
+        $response = $this->usergroupsClient->updateUsergroup(2, [
             'name'          => 'Administrators',
             'description'   => 'Administrators usergroup',
             'is_supergroup' => true,
@@ -20,7 +20,7 @@ class UpdateUsergroupTest extends TestCase
         $response->assertSuccessful();
 
         $response->assertContains([
-            'id'            => $this->encode(2),
+            'id'            => 2,
             'name'          => 'Administrators',
             'description'   => 'Administrators usergroup',
             'is_supergroup' => true,
@@ -38,7 +38,7 @@ class UpdateUsergroupTest extends TestCase
     /** @test */
     public function it_returns_an_error_if_the_usergroup_cant_be_found()
     {
-        $response = $this->usergroupsClient->updateUsergroup($this->encode(999), []);
+        $response = $this->usergroupsClient->updateUsergroup(999, []);
 
         $response->assertException([
             'status' => 404,
@@ -48,7 +48,7 @@ class UpdateUsergroupTest extends TestCase
     /** @test */
     public function it_returns_an_error_if_validation_fails()
     {
-        $response = $this->usergroupsClient->updateUsergroup($this->encode(1), [
+        $response = $this->usergroupsClient->updateUsergroup(1, [
             'name' => 'A',
             'description' => 'B',
         ]);
@@ -64,7 +64,7 @@ class UpdateUsergroupTest extends TestCase
     {
         $originalDescription = Usergroup::find(1)->description;
 
-        $response = $this->usergroupsClient->updateUsergroup($this->encode(1), [
+        $response = $this->usergroupsClient->updateUsergroup(1, [
             'name'          => 'Administrators usergroup',
             'is_supergroup' => false,
         ]);
@@ -88,7 +88,7 @@ class UpdateUsergroupTest extends TestCase
     /** @test */
     public function it_returns_an_error_if_the_new_name_is_already_taken_in_the_organisation()
     {
-        $response = $this->usergroupsClient->updateUsergroup($this->encode(2), [
+        $response = $this->usergroupsClient->updateUsergroup(1, [
             'name' => 'Standard Usergroup',
         ]);
 

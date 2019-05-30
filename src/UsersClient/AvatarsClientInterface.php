@@ -7,8 +7,8 @@ use Illuminate\Http\UploadedFile;
 
 interface AvatarsClientInterface
 {
-    public function addAvatar(string $userId, UploadedFile $file): ApiResponseInterface;
-    public function addDefaultAvatar(string $userId): ApiResponseInterface;
-    public function fetchAvatar(string $userId): ApiResponseInterface;
-    public function deleteAvatar(string $userId): ApiResponseInterface;
+    public function addAvatar(int $userId, UploadedFile $file): ApiResponseInterface;
+    public function addDefaultAvatar(int $userId): ApiResponseInterface;
+    public function fetchAvatar(int $userId): ApiResponseInterface;
+    public function deleteAvatar(int $userId): ApiResponseInterface;
 }

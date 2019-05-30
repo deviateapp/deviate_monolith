@@ -33,14 +33,14 @@ class ActivitiesRepository extends AbstractRepository implements ActivitiesRepos
         return $this->transformer->transformSearch($paginator);
     }
 
-    public function fetchById(string $activityId): array
+    public function fetchById(int $activityId): array
     {
         $activity = $this->activity->newQuery()->findOrFail($activityId);
 
         return $this->transformer->transform($activity);
     }
 
-    public function create(array $data): string
+    public function create(array $data): int
     {
         $collection = $this->activityCollections->fetchById($data['activity_collection_id']);
 
@@ -57,10 +57,10 @@ class ActivitiesRepository extends AbstractRepository implements ActivitiesRepos
             'is_invite_only'         => (bool) $data['is_invite_only'],
         ]);
 
-        return $this->encode($activity->id);
+        return $activity->id;
     }
 
-    public function update(string $activityId, array $data): bool
+    public function update(int $activityId, array $data): bool
     {
         $activity = $this->activity->newQuery()->findOrFail($activityId)->toArray();
         $data     = array_merge($activity, $data);
@@ -80,7 +80,7 @@ class ActivitiesRepository extends AbstractRepository implements ActivitiesRepos
         ]);
     }
 
-    public function delete(string $activityId): bool
+    public function delete(int $activityId): bool
     {
         return $this->activity->newQuery()->findOrFail($activityId)->delete();
     }

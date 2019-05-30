@@ -14,10 +14,10 @@ class UploadAvatarTest extends TestCase
     {
         $file = UploadedFile::fake()->image('avatar.jpg');
 
-        $response = $this->avatarsClient->addAvatar($this->encode(1), $file);
+        $response = $this->avatarsClient->addAvatar(1, $file);
 
         $response->assertContains([
-            'user_id' => $this->encode(1),
+            'user_id' => 1,
         ]);
 
         $this->assertDatabaseHas('avatars', [
@@ -34,7 +34,7 @@ class UploadAvatarTest extends TestCase
         $existing  = factory(Avatar::class)->create(['user_id' => 1]);
         $newAvatar = UploadedFile::fake()->image('avatar.jpg');
 
-        $response = $this->avatarsClient->addAvatar($this->encode(1), $newAvatar);
+        $response = $this->avatarsClient->addAvatar(1, $newAvatar);
 
         $response->assertSuccessful();
 
@@ -48,7 +48,7 @@ class UploadAvatarTest extends TestCase
     {
         $file = UploadedFile::fake()->create('invalid-file.txt', 10);
 
-        $response = $this->avatarsClient->addAvatar($this->encode(1), $file);
+        $response = $this->avatarsClient->addAvatar(1, $file);
 
         $response->assertException([
             'status' => 422,
@@ -61,7 +61,7 @@ class UploadAvatarTest extends TestCase
     {
         $file = UploadedFile::fake()->image('invalid-file.txt', 1001, 1001);
 
-        $response = $this->avatarsClient->addAvatar($this->encode(1), $file);
+        $response = $this->avatarsClient->addAvatar(1, $file);
 
         $response->assertException([
             'status' => 422,

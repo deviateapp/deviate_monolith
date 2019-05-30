@@ -15,7 +15,7 @@ class FetchAvatar implements FetchAvatarInterface
         $this->fetchesAvatars = $fetchesAvatars;
     }
 
-    public function fetchAvatarByUserId(string $userId): array
+    public function fetchAvatarByUserId(int $userId): array
     {
         return $this->fetchesAvatars->fetchAvatarByUserId($userId);
     }

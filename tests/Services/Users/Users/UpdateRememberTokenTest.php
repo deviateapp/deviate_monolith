@@ -9,7 +9,7 @@ class UpdateRememberTokenTest extends TestCase
     /** @test */
     public function the_remember_token_can_be_updated()
     {
-        $response = $this->updatesUsersClient->updateRememberToken($this->encode(1), 'test-remember-token');
+        $response = $this->updatesUsersClient->updateRememberToken(1, 'test-remember-token');
 
         $response->assertSuccessful();
 
@@ -22,7 +22,7 @@ class UpdateRememberTokenTest extends TestCase
     /** @test */
     public function it_returns_an_error_if_the_user_cant_be_found()
     {
-        $response = $this->updatesUsersClient->updateRememberToken($this->encode(999), 'test-remember-token');
+        $response = $this->updatesUsersClient->updateRememberToken(999, 'test-remember-token');
 
         $response->assertException([
             'status' => 404,

@@ -26,7 +26,7 @@ class FetchUsergroupsRepository extends AbstractRepository implements FetchUserg
         return $this->transformer->transformSearch($paginator);
     }
 
-    public function fetchById(string $id): array
+    public function fetchById(int $id): array
     {
         /** @var Usergroup $usergroup */
         $usergroup = $this->usergroup->newQuery()->findOrFail($id);
@@ -34,7 +34,7 @@ class FetchUsergroupsRepository extends AbstractRepository implements FetchUserg
         return $this->transformer->transform($usergroup);
     }
 
-    public function isNameRegistered(string $organisationId, string $name, ?string $excludeId = null): bool
+    public function isNameRegistered(int $organisationId, string $name, ?int $excludeId = null): bool
     {
         $usergroup = $this->usergroup->newQuery()->where('organisation_id', $organisationId)
             ->where('name', $name)

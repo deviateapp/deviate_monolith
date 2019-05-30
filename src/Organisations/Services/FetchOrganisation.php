@@ -6,12 +6,9 @@ use Deviate\Organisations\Contracts\Repositories\FetchOrganisationsRepositoryInt
 use Deviate\Organisations\Contracts\Services\FetchOrganisationInterface;
 use Deviate\Organisations\Normalizers\OrganisationSearchNormalizer;
 use Deviate\Shared\Search\SearchContainerInterface;
-use Deviate\Shared\Traits\ConvertsHashIds;
 
 class FetchOrganisation implements FetchOrganisationInterface
 {
-    use ConvertsHashIds;
-
     /** @var FetchOrganisationsRepositoryInterface */
     private $fetchesOrganisations;
 
@@ -31,7 +28,7 @@ class FetchOrganisation implements FetchOrganisationInterface
         return $this->fetchesOrganisations->search($this->normalizer->normalize($search));
     }
 
-    public function fetchById(string $id): array
+    public function fetchById(int $id): array
     {
         return $this->fetchesOrganisations->fetchOrganisationById($id);
     }

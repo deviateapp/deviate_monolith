@@ -12,7 +12,7 @@ class CreateUserTest extends TestCase
     public function test_a_new_user_can_be_created()
     {
         $response = $this->createsUsersClient->createUser([
-            'organisation_id' => $this->encode(1),
+            'organisation_id' => 1,
             'forename'        => 'Caitlin',
             'surname'         => 'Cross',
             'email'           => 'caitlin@deviate.test',
@@ -27,13 +27,13 @@ class CreateUserTest extends TestCase
         ]);
 
         $response->assertContains([
-            'organisation_id' => $this->encode(1),
+            'organisation_id' => 1,
             'forename'        => 'Caitlin',
             'surname'         => 'Cross',
             'email'           => 'caitlin@deviate.test',
         ]);
 
-        $this->assertTrue(Hash::check('testpassword', User::find($this->decode($response->get('id')))->password));
+        $this->assertTrue(Hash::check('testpassword', User::find($response->get('id'))->password));
     }
 
     /** @test */
@@ -51,7 +51,7 @@ class CreateUserTest extends TestCase
     public function it_returns_an_error_if_the_organisation_doesnt_exist()
     {
         $response = $this->createsUsersClient->createUser([
-            'organisation_id' => $this->encode(999),
+            'organisation_id' => 999,
             'forename'        => 'Caitlin',
             'surname'         => 'Cross',
             'email'           => 'caitlin@deviate.test',
@@ -68,7 +68,7 @@ class CreateUserTest extends TestCase
     public function it_returns_an_error_if_the_email_has_already_been_registered_within_the_organisation()
     {
         $response = $this->createsUsersClient->createUser([
-            'organisation_id' => $this->encode(1),
+            'organisation_id' => 1,
             'forename'        => 'Caitlin',
             'surname'         => 'Cross',
             'email'           => 'brody@deviate.test',

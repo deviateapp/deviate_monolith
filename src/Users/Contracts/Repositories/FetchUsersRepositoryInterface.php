@@ -6,7 +6,7 @@ use Deviate\Shared\Repositories\SearchableRepositoryInterface;
 
 interface FetchUsersRepositoryInterface extends SearchableRepositoryInterface
 {
-    public function fetchUserById(string $id): array;
+    public function fetchUserById(int $id): array;
     public function fetchUserByCredentials(array $data): array;
-    public function fetchPasswordById(string $id): string;
+    public function fetchPasswordById(int $id): string;
 }

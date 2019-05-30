@@ -9,7 +9,7 @@ class DeleteUsergroupTest extends TestCase
     /** @test */
     public function a_usergroup_can_be_deleted()
     {
-        $response = $this->usergroupsClient->deleteUsergroup($this->encode(1));
+        $response = $this->usergroupsClient->deleteUsergroup(1);
 
         $response->assertSuccessful();
 
@@ -21,7 +21,7 @@ class DeleteUsergroupTest extends TestCase
     /** @test */
     public function it_returns_an_error_if_the_usergroup_cannot_be_found()
     {
-        $response = $this->usergroupsClient->deleteUsergroup($this->encode(999));
+        $response = $this->usergroupsClient->deleteUsergroup(999);
 
         $response->assertException([
             'status' => 404,
@@ -31,7 +31,7 @@ class DeleteUsergroupTest extends TestCase
     /** @test */
     public function it_removes_all_users_from_the_group_when_deleting()
     {
-        $response = $this->usergroupsClient->deleteUsergroup($this->encode(1));
+        $response = $this->usergroupsClient->deleteUsergroup(1);
 
         $response->assertSuccessful();
 

@@ -26,12 +26,12 @@ class SearchOrganisationsTest extends TestCase
 
         $response->assertPaginatedResultsContains([
             [
-                'id'   => $this->encode(2),
+                'id'   => 2,
                 'name' => 'Citrium',
                 'slug' => 'citrium',
             ],
             [
-                'id'   => $this->encode(1),
+                'id'   => 1,
                 'name' => 'Deviate',
                 'slug' => 'deviate',
             ],
@@ -52,7 +52,7 @@ class SearchOrganisationsTest extends TestCase
             'total_records' => 2,
         ]);
 
-        $response->assertPaginatedResultsContainIdsInOrder($this->encode(2));
+        $response->assertPaginatedResultsContainIdsInOrder(2);
     }
 
     /** @test */
@@ -67,7 +67,7 @@ class SearchOrganisationsTest extends TestCase
             'current_page' => 2,
         ]);
 
-        $response->assertPaginatedResultsContainIdsInOrder($this->encode(1));
+        $response->assertPaginatedResultsContainIdsInOrder(1);
     }
 
     /** @test */
@@ -78,7 +78,7 @@ class SearchOrganisationsTest extends TestCase
 
         $response = $this->searchClient->search($container);
 
-        $response->assertPaginatedResultsContainIdsInOrder($this->encode(1), $this->encode(2));
+        $response->assertPaginatedResultsContainIdsInOrder(1, 2);
     }
 
     /** @test */
@@ -89,7 +89,7 @@ class SearchOrganisationsTest extends TestCase
 
         $response = $this->searchClient->search($container);
 
-        $response->assertPaginatedResultsContainIdsInOrder($this->encode(2), $this->encode(1));
+        $response->assertPaginatedResultsContainIdsInOrder(2, 1);
     }
 
     /** @test */
@@ -100,7 +100,7 @@ class SearchOrganisationsTest extends TestCase
 
         $response = $this->searchClient->search($container);
 
-        $response->assertPaginatedResultsContainIdsInOrder($this->encode(1), $this->encode(2));
+        $response->assertPaginatedResultsContainIdsInOrder(1, 2);
     }
 
     /** @test */
@@ -115,6 +115,6 @@ class SearchOrganisationsTest extends TestCase
             'total_records' => 1,
         ]);
 
-        $response->assertPaginatedResultsContainIdsInOrder($this->encode(2));
+        $response->assertPaginatedResultsContainIdsInOrder(2);
     }
 }

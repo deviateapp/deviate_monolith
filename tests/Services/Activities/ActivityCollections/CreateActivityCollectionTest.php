@@ -10,7 +10,7 @@ class CreateActivityCollectionTest extends TestCase
     public function it_can_create_a_new_activity_collection()
     {
         $data = [
-            'organisation_id'     => $this->encode(1),
+            'organisation_id'     => 1,
             'name'                => 'Test Collection',
             'description'         => 'This is a test collection',
             'booking_starts_at'   => '2019-01-01 00:00:00',
@@ -57,7 +57,7 @@ class CreateActivityCollectionTest extends TestCase
     public function it_returns_an_error_if_the_organisation_doesnt_exist()
     {
         $response = $this->collectionsClient->createCollection([
-            'organisation_id'     => $this->encode(999),
+            'organisation_id'     => 999,
             'name'                => 'Test Collection',
             'description'         => 'This is a test collection',
             'booking_starts_at'   => '2019-01-01 00:00:00',

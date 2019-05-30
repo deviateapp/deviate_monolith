@@ -28,7 +28,7 @@ class UpdateOrganisation implements UpdateOrganisationInterface
         $this->validator            = $validator;
     }
 
-    public function updateByOrganisationId(string $id, array $data): ?array
+    public function updateByOrganisationId(int $id, array $data): ?array
     {
         $this->validator->validate($data, [
             'id' => $id,

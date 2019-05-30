@@ -41,7 +41,7 @@ class UpdateUsergroup implements UpdateUsergroupInterface
         $this->applyPermissionsValidator = $applyPermissionsValidator;
     }
 
-    public function updateByUsergroupId(string $id, array $data): array
+    public function updateByUsergroupId(int $id, array $data): array
     {
         $usergroup = $this->fetchesUsergroups->fetchById($id);
 
@@ -55,7 +55,7 @@ class UpdateUsergroup implements UpdateUsergroupInterface
         return $this->fetchesUsergroups->fetchById($id);
     }
 
-    public function applyPermissions(string $id, array $permissions): void
+    public function applyPermissions(int $id, array $permissions): void
     {
         $this->applyPermissionsValidator->validate([
             'permissions' => $permissions,

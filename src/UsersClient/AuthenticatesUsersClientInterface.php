@@ -6,5 +6,5 @@ use Deviate\Shared\Responses\Clients\ApiResponseInterface;
 
 interface AuthenticatesUsersClientInterface
 {
-    public function validatePassword(string $userId, string $password): ApiResponseInterface;
+    public function validatePassword(int $userId, string $password): ApiResponseInterface;
 }

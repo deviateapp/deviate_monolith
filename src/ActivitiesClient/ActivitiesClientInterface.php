@@ -6,8 +6,8 @@ use Deviate\Shared\Responses\Clients\ApiResponseInterface;
 
 interface ActivitiesClientInterface
 {
-    public function fetchById(string $activityId): ApiResponseInterface;
-    public function create(string $collectionId, array $data): ApiResponseInterface;
-    public function updateDetails(string $activityId, array $data): ApiResponseInterface;
-    public function delete(string $activityId): ApiResponseInterface;
+    public function fetchById(int $activityId): ApiResponseInterface;
+    public function create(int $collectionId, array $data): ApiResponseInterface;
+    public function updateDetails(int $activityId, array $data): ApiResponseInterface;
+    public function delete(int $activityId): ApiResponseInterface;
 }

@@ -16,12 +16,12 @@ class DeleteUsersRepository extends AbstractRepository implements DeleteUsersRep
         $this->user = $user;
     }
 
-    public function deleteUserById(string $id): bool
+    public function deleteUserById(int $id): bool
     {
         return (bool) $this->user->newQuery()->withTrashed()->findOrFail($id)->forceDelete();
     }
 
-    public function deleteUsersByOrganisationId(string $id): bool
+    public function deleteUsersByOrganisationId(int $id): bool
     {
         return (bool) $this->user->newQuery()->withTrashed()->where([
             'organisation_id' => $id,

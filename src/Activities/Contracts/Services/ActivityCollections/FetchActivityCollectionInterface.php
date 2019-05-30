@@ -6,6 +6,6 @@ use Deviate\Shared\Search\SearchContainerInterface;
 
 interface FetchActivityCollectionInterface
 {
-    public function fetchById(string $collectionId): array;
+    public function fetchById(int $collectionId): array;
     public function search(SearchContainerInterface $search): array;
 }

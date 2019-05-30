@@ -6,6 +6,6 @@ use Deviate\Shared\Responses\Clients\ApiResponseInterface;
 
 interface InvitationsClientInterface
 {
-    public function invite(string $userId, string $activityId): ApiResponseInterface;
-    public function uninvite(string $userId, string $activityId): ApiResponseInterface;
+    public function invite(int $userId, int $activityId): ApiResponseInterface;
+    public function uninvite(int $userId, int $activityId): ApiResponseInterface;
 }

@@ -10,7 +10,7 @@ class MembershipTest extends TestCase
     /** @test */
     public function it_an_add_a_user_to_a_usergroup()
     {
-        $response = $this->membershipClient->join($this->encode(3), $this->encode(1));
+        $response = $this->membershipClient->join(3, 1);
 
         $response->assertSuccessful();
 
@@ -23,7 +23,7 @@ class MembershipTest extends TestCase
     /** @test */
     public function it_returns_an_error_if_the_user_cannot_be_found_when_joining_a_usergroup()
     {
-        $response = $this->membershipClient->join($this->encode(999), $this->encode(1));
+        $response = $this->membershipClient->join(999, 1);
 
         $response->assertException([
             'status' => 404,
@@ -33,7 +33,7 @@ class MembershipTest extends TestCase
     /** @test */
     public function it_returns_an_error_if_the_usergroup_cannot_be_found_when_joining_a_usergroup()
     {
-        $response = $this->membershipClient->join($this->encode(3), $this->encode(999));
+        $response = $this->membershipClient->join(3, 999);
 
         $response->assertException([
             'status' => 404,
@@ -43,7 +43,7 @@ class MembershipTest extends TestCase
     /** @test */
     public function it_can_remove_a_user_from_a_usergroup()
     {
-        $response = $this->membershipClient->remove($this->encode(2), $this->encode(1));
+        $response = $this->membershipClient->remove(2, 1);
 
         $response->assertSuccessful();
 
@@ -56,7 +56,7 @@ class MembershipTest extends TestCase
     /** @test */
     public function it_returns_an_error_if_the_user_cannot_be_found_when_removing_a_user_from_a_usergroup()
     {
-        $response = $this->membershipClient->remove($this->encode(999), $this->encode(1));
+        $response = $this->membershipClient->remove(999, 1);
 
         $response->assertException([
             'status' => 404,
@@ -66,7 +66,7 @@ class MembershipTest extends TestCase
     /** @test */
     public function it_returns_an_error_if_the_usergroup_cannot_be_found_when_removing_a_user_from_a_usergroup()
     {
-        $response = $this->membershipClient->remove($this->encode(3), $this->encode(999));
+        $response = $this->membershipClient->remove(3, 999);
 
         $response->assertException([
             'status' => 404,
@@ -76,7 +76,7 @@ class MembershipTest extends TestCase
     /** @test */
     public function it_can_remove_a_user_from_all_usergroups()
     {
-        $response = $this->membershipClient->removeByUserId($this->encode(2));
+        $response = $this->membershipClient->removeByUserId(2);
 
         $response->assertSuccessful();
 
@@ -88,7 +88,7 @@ class MembershipTest extends TestCase
     /** @test */
     public function it_returns_an_error_if_the_user_cant_be_found_when_removing_a_user_from_all_usergroups()
     {
-        $response = $this->membershipClient->removeByUserId($this->encode(999));
+        $response = $this->membershipClient->removeByUserId(999);
 
         $response->assertException([
             'status' => 404,
@@ -98,7 +98,7 @@ class MembershipTest extends TestCase
     /** @test */
     public function it_can_remove_all_users_of_a_usergroup()
     {
-        $response = $this->membershipClient->removeByUsergroupId($this->encode(1));
+        $response = $this->membershipClient->removeByUsergroupId(1);
 
         $response->assertSuccessful();
 
@@ -110,7 +110,7 @@ class MembershipTest extends TestCase
     /** @test */
     public function it_returns_an_error_if_the_user_cant_be_found_when_removing_all_users_from_a_usergroup()
     {
-        $response = $this->membershipClient->removeByUserId($this->encode(999));
+        $response = $this->membershipClient->removeByUserId(999);
 
         $response->assertException([
             'status' => 404,
@@ -123,7 +123,7 @@ class MembershipTest extends TestCase
         $container = new SearchContainer;
         $container->perPage(5)->forPage(1);
 
-        $response = $this->membershipClient->listMembers($this->encode(1), $container);
+        $response = $this->membershipClient->listMembers(1, $container);
 
         $response->assertSuccessful();
 
@@ -133,7 +133,7 @@ class MembershipTest extends TestCase
             'total_records' => 1,
         ]);
 
-        $response->assertPaginatedResultsContainIdsInOrder($this->encode(2));
+        $response->assertPaginatedResultsContainIdsInOrder(2);
     }
 
     /** @test */
@@ -141,7 +141,7 @@ class MembershipTest extends TestCase
     {
         $container = new SearchContainer;
 
-        $response = $this->membershipClient->listMembers($this->encode(999), $container);
+        $response = $this->membershipClient->listMembers(999, $container);
 
         $response->assertException([
             'status' => 404,

@@ -13,13 +13,13 @@ class FetchUsergroupTest extends TestCase
     {
         Usergroup::find(1)->permissions()->save(Permission::find(1));
 
-        $response = $this->usergroupsClient->fetchUsergroup($this->encode(1));
+        $response = $this->usergroupsClient->fetchUsergroup(1);
 
         $response->assertSuccessful();
 
         $response->assertContains([
-            'id'              => $this->encode(1),
-            'organisation_id' => $this->encode(1),
+            'id'              => 1,
+            'organisation_id' => 1,
             'name'            => 'Network Administrators',
         ]);
     }
@@ -27,7 +27,7 @@ class FetchUsergroupTest extends TestCase
     /** @test */
     public function it_returns_an_error_if_the_usergroup_cant_be_found()
     {
-        $response = $this->usergroupsClient->fetchUsergroup($this->encode(999));
+        $response = $this->usergroupsClient->fetchUsergroup(999);
 
         $response->assertException([
             'status' => 404,

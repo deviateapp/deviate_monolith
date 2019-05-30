@@ -15,12 +15,12 @@ class DeleteUsergroupsRepository extends AbstractRepository implements DeleteUse
         $this->usergroup = $usergroup;
     }
 
-    public function deleteUsergroupById(string $usergroupId): bool
+    public function deleteUsergroupById(int $usergroupId): bool
     {
         return (bool) $this->usergroup->newQuery()->findOrFail($usergroupId)->delete();
     }
 
-    public function deleteUsergroupByOrganisationId(string $organisationId): bool
+    public function deleteUsergroupByOrganisationId(int $organisationId): bool
     {
         return (bool) $this->usergroup->newQuery()->where('organisation_id', $organisationId)->delete();
     }

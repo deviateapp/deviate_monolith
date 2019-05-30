@@ -20,7 +20,7 @@ class FetchActivityCollection implements FetchActivityCollectionInterface
         $this->normalizer = $normalizer;
     }
 
-    public function fetchById(string $collectionId): array
+    public function fetchById(int $collectionId): array
     {
         return $this->repository->fetchById($collectionId);
     }

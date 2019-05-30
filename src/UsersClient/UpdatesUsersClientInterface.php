@@ -6,9 +6,9 @@ use Deviate\Shared\Responses\Clients\ApiResponseInterface;
 
 interface UpdatesUsersClientInterface
 {
-    public function updatePassword(string $userId, string $password): ApiResponseInterface;
-    public function updateRememberToken(string $userId, ?string $token): ApiResponseInterface;
-    public function updateCoreDetails(string $userId, array $data): ApiResponseInterface;
-    public function deactivateUser(string $userId): ApiResponseInterface;
-    public function reactivateUser(string $userId): ApiResponseInterface;
+    public function updatePassword(int $userId, string $password): ApiResponseInterface;
+    public function updateRememberToken(int $userId, ?string $token): ApiResponseInterface;
+    public function updateCoreDetails(int $userId, array $data): ApiResponseInterface;
+    public function deactivateUser(int $userId): ApiResponseInterface;
+    public function reactivateUser(int $userId): ApiResponseInterface;
 }

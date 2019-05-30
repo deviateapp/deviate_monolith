@@ -6,9 +6,9 @@ use Deviate\Shared\Repositories\SearchableRepositoryInterface;
 
 interface ActivityCollectionsRepositoryInterface extends SearchableRepositoryInterface
 {
-    public function fetchById(string $collectionId): array;
-    public function create(array $data): string;
+    public function fetchById(int $collectionId): array;
+    public function create(array $data): int;
     public function fetchAll(): array;
-    public function deleteById(string $collectionId): bool;
-    public function update(string $collectionId, array $data): bool;
+    public function deleteById(int $collectionId): bool;
+    public function update(int $collectionId, array $data): bool;
 }

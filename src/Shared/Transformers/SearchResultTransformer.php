@@ -2,14 +2,11 @@
 
 namespace Deviate\Shared\Transformers;
 
-use Deviate\Shared\Traits\ConvertsHashIds;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Model;
 
 class SearchResultTransformer
 {
-    use ConvertsHashIds;
-
     public function transform(LengthAwarePaginator $paginator, TransformerInterface $baseTransformer): array
     {
         return [

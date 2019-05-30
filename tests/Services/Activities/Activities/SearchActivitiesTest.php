@@ -2,7 +2,6 @@
 
 namespace Deviate\Activities\Tests\Services\Activities;
 
-use Deviate\Activities\Models\Eloquent\ActivityCollection;
 use Deviate\Shared\Search\Filters\MatchesFuzzy;
 use Deviate\Shared\Search\SearchContainer;
 use Deviate\Shared\Search\Sorting\RegularSort;
@@ -27,11 +26,7 @@ class SearchActivitiesTest extends TestCase
             'total_records' => 3,
         ]);
 
-        $response->assertPaginatedResultsContainIdsInOrder(
-            $this->encode(2),
-            $this->encode(3),
-            $this->encode(1)
-        );
+        $response->assertPaginatedResultsContainIdsInOrder(2, 3, 1);
     }
 
     /** @test */
@@ -48,7 +43,7 @@ class SearchActivitiesTest extends TestCase
             'total_records' => 3,
         ]);
 
-        $response->assertPaginatedResultsContainIdsInOrder($this->encode(2), $this->encode(3));
+        $response->assertPaginatedResultsContainIdsInOrder(2, 3);
     }
 
     /** @test */
@@ -63,7 +58,7 @@ class SearchActivitiesTest extends TestCase
             'current_page' => 2,
         ]);
 
-        $response->assertPaginatedResultsContainIdsInOrder($this->encode(1));
+        $response->assertPaginatedResultsContainIdsInOrder(1);
     }
 
     /** @test */
@@ -74,11 +69,7 @@ class SearchActivitiesTest extends TestCase
 
         $response = $this->searchClient->searchActivities($container);
 
-        $response->assertPaginatedResultsContainIdsInOrder(
-            $this->encode(1),
-            $this->encode(3),
-            $this->encode(2)
-        );
+        $response->assertPaginatedResultsContainIdsInOrder(1, 3, 2);
     }
 
     /** @test */
@@ -89,7 +80,7 @@ class SearchActivitiesTest extends TestCase
 
         $response = $this->searchClient->searchActivities($container);
 
-        $response->assertPaginatedResultsContainIdsInOrder($this->encode(2), $this->encode(3));
+        $response->assertPaginatedResultsContainIdsInOrder(2, 3);
     }
 
     /** @test */
@@ -104,7 +95,7 @@ class SearchActivitiesTest extends TestCase
 
         $response = $this->searchClient->searchActivities($container);
 
-        $response->assertPaginatedResultsContainIdsInOrder($this->encode(3), $this->encode(2), $this->encode(1));
+        $response->assertPaginatedResultsContainIdsInOrder(3, 2, 1);
     }
 
     /** @test */
@@ -119,8 +110,6 @@ class SearchActivitiesTest extends TestCase
             'total_records' => 1,
         ]);
 
-        $response->assertPaginatedResultsContainIdsInOrder(
-            $this->encode(3)
-        );
+        $response->assertPaginatedResultsContainIdsInOrder(3);
     }
 }

@@ -7,7 +7,7 @@ use Deviate\Shared\Responses\Clients\ApiResponseInterface;
 
 class CollectionsClient extends AbstractClient implements CollectionsClientInterface
 {
-    public function fetchCollection(string $collectionId): ApiResponseInterface
+    public function fetchCollection(int $collectionId): ApiResponseInterface
     {
         return $this->call('activities.collections.fetch_by_id', [
             'id' => $collectionId,
@@ -24,14 +24,14 @@ class CollectionsClient extends AbstractClient implements CollectionsClientInter
         return $this->call('activities.collections.list');
     }
 
-    public function deleteCollection(string $collectionId): ApiResponseInterface
+    public function deleteCollection(int $collectionId): ApiResponseInterface
     {
         return $this->call('activities.collections.delete_by_id', [
             'id' => $collectionId,
         ]);
     }
 
-    public function updateCollection(string $collectionId, array $data): ApiResponseInterface
+    public function updateCollection(int $collectionId, array $data): ApiResponseInterface
     {
         return $this->call('activities.collections.update', array_merge($data, [
             'id' => $collectionId,

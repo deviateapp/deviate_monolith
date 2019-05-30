@@ -7,12 +7,9 @@ use Deviate\Activities\Contracts\Services\Bookings\BookActivityInterface;
 use Deviate\Activities\Contracts\Services\Bookings\UnbookActivityInterface;
 use Deviate\Activities\Contracts\Services\Bookings\SearchesBookingsInterface;
 use Deviate\Shared\Events\AbstractEventSubscriber;
-use Deviate\Shared\Traits\ConvertsHashIds;
 
 class BookingsEventSubscriber extends AbstractEventSubscriber implements BookingsEventSubscriberInterface
 {
-    use ConvertsHashIds;
-
     protected $events = [
         'activities.book'                                => 'handleBook',
         'activities.unbook'                              => 'handleUnbook',

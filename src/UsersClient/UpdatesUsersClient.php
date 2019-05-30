@@ -9,7 +9,7 @@ use Deviate\Shared\Responses\Clients\ApiResponseInterface;
 
 class UpdatesUsersClient extends AbstractClient implements UpdatesUsersClientInterface
 {
-    public function updatePassword(string $userId, string $password): ApiResponseInterface
+    public function updatePassword(int $userId, string $password): ApiResponseInterface
     {
         return $this->call('users.update.password', [
             'id'       => $userId,
@@ -17,7 +17,7 @@ class UpdatesUsersClient extends AbstractClient implements UpdatesUsersClientInt
         ]);
     }
 
-    public function updateRememberToken(string $userId, ?string $token): ApiResponseInterface
+    public function updateRememberToken(int $userId, ?string $token): ApiResponseInterface
     {
         return $this->call('users.update.remember_token', [
             'id'    => $userId,
@@ -25,14 +25,14 @@ class UpdatesUsersClient extends AbstractClient implements UpdatesUsersClientInt
         ]);
     }
 
-    public function updateCoreDetails(string $userId, array $data): ApiResponseInterface
+    public function updateCoreDetails(int $userId, array $data): ApiResponseInterface
     {
         return $this->call('users.update.core_details', array_merge($data, [
             'id' => $userId,
         ]));
     }
 
-    public function deactivateUser(string $userId): ApiResponseInterface
+    public function deactivateUser(int $userId): ApiResponseInterface
     {
         return $this->call('users.authentication.modify_activation', [
             'id'     => $userId,
@@ -40,7 +40,7 @@ class UpdatesUsersClient extends AbstractClient implements UpdatesUsersClientInt
         ]);
     }
 
-    public function reactivateUser(string $userId): ApiResponseInterface
+    public function reactivateUser(int $userId): ApiResponseInterface
     {
         return $this->call('users.authentication.modify_activation', [
             'id'     => $userId,

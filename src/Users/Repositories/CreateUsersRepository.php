@@ -16,16 +16,16 @@ class CreateUsersRepository extends AbstractRepository implements CreateUsersRep
         $this->user = $user;
     }
 
-    public function createUser(array $data): string
+    public function createUser(array $data): int
     {
         $user = $this->user->newQuery()->create([
-            'organisation_id' => $this->decode($data['organisation_id']),
+            'organisation_id' => $data['organisation_id'],
             'forename'        => $data['forename'],
             'surname'         => $data['surname'],
             'email'           => $data['email'],
             'password'        => $data['password'],
         ]);
 
-        return $this->encode($user->id);
+        return $user->id;
     }
 }

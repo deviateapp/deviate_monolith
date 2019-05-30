@@ -6,6 +6,6 @@ use Deviate\Shared\Responses\Clients\ApiResponseInterface;
 
 interface FetchesUsersClientInterface
 {
-    public function fetchUserById(string $id): ApiResponseInterface;
-    public function fetchUserByRememberToken(string $organisationId, string $token): ApiResponseInterface;
+    public function fetchUserById(int $id): ApiResponseInterface;
+    public function fetchUserByRememberToken(int $organisationId, string $token): ApiResponseInterface;
 }

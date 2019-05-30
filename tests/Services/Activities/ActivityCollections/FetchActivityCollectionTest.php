@@ -13,12 +13,12 @@ class FetchActivityCollectionTest extends TestCase
         /** @var ActivityCollection $collection */
         $collection = ActivityCollection::find(1);
 
-        $response = $this->collectionsClient->fetchCollection($this->encode(1));
+        $response = $this->collectionsClient->fetchCollection(1);
 
         $response->assertSuccessful();
 
         $response->assertContains([
-            'organisation_id'     => $this->encode(1),
+            'organisation_id'     => 1,
             'name'                => $collection->name,
             'description'         => $collection->description,
             'booking_starts_at'   => $collection->booking_starts_at->format('Y-m-d 00:00:00'),
@@ -33,7 +33,7 @@ class FetchActivityCollectionTest extends TestCase
     /** @test */
     public function it_returns_an_error_if_the_usergroup_cannot_be_found()
     {
-        $response = $this->collectionsClient->fetchCollection($this->encode(999));
+        $response = $this->collectionsClient->fetchCollection(999);
 
         $response->assertException([
             'status' => 404,

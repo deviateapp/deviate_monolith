@@ -23,7 +23,7 @@ class UnbookActivityTest extends TestCase
             'updated_at'  => now()->format('Y-m-d H:i:s'),
         ]);
 
-        $response = $this->bookingsClient->unbook($this->encode(1), $this->encode(1));
+        $response = $this->bookingsClient->unbook(1, 1);
 
         $response->assertSuccessful();
 
@@ -36,7 +36,7 @@ class UnbookActivityTest extends TestCase
     /** @test */
     public function an_error_is_returned_if_the_user_cannot_be_found_when_unbooking()
     {
-        $response = $this->bookingsClient->unbook($this->encode(999), $this->encode(1));
+        $response = $this->bookingsClient->unbook(999, 1);
 
         $response->assertException([
             'status' => 404,
@@ -46,7 +46,7 @@ class UnbookActivityTest extends TestCase
     /** @test */
     public function an_error_is_returned_if_the_activity_cannot_be_found_when_unbooking()
     {
-        $response = $this->bookingsClient->unbook($this->encode(1), $this->encode(999));
+        $response = $this->bookingsClient->unbook(1, 999);
 
         $response->assertException([
             'status' => 404,
@@ -64,7 +64,7 @@ class UnbookActivityTest extends TestCase
             'updated_at'  => now()->format('Y-m-d H:i:s'),
         ]);
 
-        $response = $this->bookingsClient->unbook($this->encode(1), $this->encode(1));
+        $response = $this->bookingsClient->unbook(1, 1);
 
         $response->assertException([
             'status' => 409,
@@ -80,7 +80,7 @@ class UnbookActivityTest extends TestCase
             'status'      => 'booked',
         ]);
 
-        $response = $this->bookingsClient->unbook($this->encode(1), $this->encode(1), true);
+        $response = $this->bookingsClient->unbook(1, 1, true);
 
         $response->assertSuccessful();
 
@@ -93,7 +93,7 @@ class UnbookActivityTest extends TestCase
     /** @test */
     public function it_returns_a_success_response_if_the_user_isnt_already_booked()
     {
-        $response = $this->bookingsClient->unbook($this->encode(1), $this->encode(1), true);
+        $response = $this->bookingsClient->unbook(1, 1, true);
 
         $response->assertSuccessful();
     }

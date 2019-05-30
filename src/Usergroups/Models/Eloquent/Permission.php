@@ -4,6 +4,7 @@ namespace Deviate\Usergroups\Models\Eloquent;
 
 use Deviate\Usergroups\Models\Eloquent\Builders\PermissionBuilder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 /**

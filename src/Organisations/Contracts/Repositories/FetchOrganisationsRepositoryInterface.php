@@ -7,6 +7,6 @@ use Deviate\Shared\Repositories\SearchableRepositoryInterface;
 interface FetchOrganisationsRepositoryInterface extends SearchableRepositoryInterface
 {
     public function fetchByDetails(array $details): array;
-    public function fetchOrganisationById(string $id): array;
-    public function isSlugRegistered(string $slug, ?string $ignoreId = null): bool;
+    public function fetchOrganisationById(int $id): array;
+    public function isSlugRegistered(string $slug, ?int $ignoreId = null): bool;
 }

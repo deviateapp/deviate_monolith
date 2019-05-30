@@ -30,7 +30,7 @@ class UnbookActivity implements UnbookActivityInterface
         $this->fetchesActivityCollections = $fetchesActivityCollections;
     }
 
-    public function unbookUserFromActivity(string $userId, string $activityId, bool $force = false): void
+    public function unbookUserFromActivity(int $userId, int $activityId, bool $force = false): void
     {
         $this->fetchesUsers->fetchUserById($userId)->rethrow();
         $activity = $this->fetchesActivities->fetchById($activityId)->rethrow();

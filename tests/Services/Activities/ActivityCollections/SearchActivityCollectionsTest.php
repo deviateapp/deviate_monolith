@@ -27,10 +27,7 @@ class SearchActivityCollectionsTest extends TestCase
             'total_records' => 2,
         ]);
 
-        $response->assertPaginatedResultsContainIdsInOrder(
-            $this->encode(1),
-            $this->encode(2)
-        );
+        $response->assertPaginatedResultsContainIdsInOrder(1, 2);
     }
 
     /** @test */
@@ -47,7 +44,7 @@ class SearchActivityCollectionsTest extends TestCase
             'total_records' => 2,
         ]);
 
-        $response->assertPaginatedResultsContainIdsInOrder($this->encode(1));
+        $response->assertPaginatedResultsContainIdsInOrder(1);
     }
 
     /** @test */
@@ -62,7 +59,7 @@ class SearchActivityCollectionsTest extends TestCase
             'current_page' => 2,
         ]);
 
-        $response->assertPaginatedResultsContainIdsInOrder($this->encode(2));
+        $response->assertPaginatedResultsContainIdsInOrder(2);
     }
 
     /** @test */
@@ -73,10 +70,7 @@ class SearchActivityCollectionsTest extends TestCase
 
         $response = $this->searchClient->searchCollections($container);
 
-        $response->assertPaginatedResultsContainIdsInOrder(
-            $this->encode(2),
-            $this->encode(1)
-        );
+        $response->assertPaginatedResultsContainIdsInOrder(2, 1);
     }
 
     /** @test */
@@ -87,7 +81,7 @@ class SearchActivityCollectionsTest extends TestCase
 
         $response = $this->searchClient->searchCollections($container);
 
-        $response->assertPaginatedResultsContainIdsInOrder($this->encode(1), $this->encode(2));
+        $response->assertPaginatedResultsContainIdsInOrder(1, 2);
     }
 
     /** @test */
@@ -98,7 +92,7 @@ class SearchActivityCollectionsTest extends TestCase
 
         $response = $this->searchClient->searchCollections($container);
 
-        $response->assertPaginatedResultsContainIdsInOrder($this->encode(2), $this->encode(1));
+        $response->assertPaginatedResultsContainIdsInOrder(2, 1);
     }
 
     /** @test */
@@ -116,8 +110,6 @@ class SearchActivityCollectionsTest extends TestCase
             'total_records' => 1,
         ]);
 
-        $response->assertPaginatedResultsContainIdsInOrder(
-            $this->encode(2)
-        );
+        $response->assertPaginatedResultsContainIdsInOrder(2);
     }
 }

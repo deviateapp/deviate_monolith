@@ -36,7 +36,7 @@ class Membership implements MembershipInterface
         $this->users             = $users;
     }
 
-    public function join(string $userId, string $usergroupId): void
+    public function join(int $userId, int $usergroupId): void
     {
         $this->fetchesUsers->fetchUserById($userId)->rethrow();
         $this->fetchesUsergroups->fetchById($usergroupId);
@@ -44,7 +44,7 @@ class Membership implements MembershipInterface
         $this->repository->join($userId, $usergroupId);
     }
 
-    public function remove(string $userId, string $usergroupId): void
+    public function remove(int $userId, int $usergroupId): void
     {
         $this->fetchesUsers->fetchUserById($userId)->rethrow();
         $this->fetchesUsergroups->fetchById($usergroupId);
@@ -52,21 +52,21 @@ class Membership implements MembershipInterface
         $this->repository->remove($userId, $usergroupId);
     }
 
-    public function removeByUsergroupId(string $usergroupId): void
+    public function removeByUsergroupId(int $usergroupId): void
     {
         $this->fetchesUsergroups->fetchById($usergroupId);
 
         $this->repository->removeByUsergroupId($usergroupId);
     }
 
-    public function removeByUserId(string $userId): void
+    public function removeByUserId(int $userId): void
     {
         $this->fetchesUsers->fetchUserById($userId)->rethrow();
 
         $this->repository->removeByUserId($userId);
     }
 
-    public function listMembers(string $usergroupId, SearchContainerInterface $search): array
+    public function listMembers(int $usergroupId, SearchContainerInterface $search): array
     {
         $this->fetchesUsergroups->fetchById($usergroupId);
 

@@ -19,14 +19,14 @@ class ActivityCollectionsRepository extends AbstractRepository implements Activi
         $this->transformer        = $transformer;
     }
 
-    public function fetchById(string $collectionId): array
+    public function fetchById(int $collectionId): array
     {
         $collection = $this->activityCollection->newQuery()->findOrFail($collectionId);
 
         return $this->transformer->transform($collection);
     }
 
-    public function create(array $data): string
+    public function create(array $data): int
     {
         $collection = $this->activityCollection->newQuery()->create([
             'organisation_id'     => $data['organisation_id'],
@@ -40,7 +40,7 @@ class ActivityCollectionsRepository extends AbstractRepository implements Activi
             'activities_end_at'   => $data['activities_end_at'],
         ]);
 
-        return $this->encode($collection->id);
+        return $collection->id;
     }
 
     public function fetchAll(): array
@@ -57,12 +57,12 @@ class ActivityCollectionsRepository extends AbstractRepository implements Activi
         return $this->transformer->transformSearch($paginator);
     }
 
-    public function deleteById(string $collectionId): bool
+    public function deleteById(int $collectionId): bool
     {
         return $this->activityCollection->newQuery()->findOrFail($collectionId)->delete();
     }
 
-    public function update(string $collectionId, array $data): bool
+    public function update(int $collectionId, array $data): bool
     {
         $collection = $this->activityCollection->newQuery()->findOrFail($collectionId)->toArray();
         $data       = array_merge($collection, $data);

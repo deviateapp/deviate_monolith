@@ -9,7 +9,7 @@ class UpdateOrganisationTest extends TestCase
     /** @test */
     public function an_organisation_can_be_updated()
     {
-        $response = $this->client->updateOrganisation($this->encode(1), [
+        $response = $this->client->updateOrganisation(1, [
             'name' => 'Deviate Ltd',
             'slug' => 'Deviate Ltd Slug',
         ]);
@@ -29,7 +29,7 @@ class UpdateOrganisationTest extends TestCase
     /** @test */
     public function the_slug_is_not_updated_if_not_supplied()
     {
-        $response = $this->client->updateOrganisation($this->encode(1), [
+        $response = $this->client->updateOrganisation(1, [
             'name' => 'Deviate Ltd',
         ]);
 
@@ -42,7 +42,7 @@ class UpdateOrganisationTest extends TestCase
     /** @test */
     public function an_error_is_returned_if_the_organisation_doesnt_exist()
     {
-        $response = $this->client->updateOrganisation($this->encode(999), [
+        $response = $this->client->updateOrganisation(999, [
             'name' => 'Deviate',
         ]);
 
@@ -54,7 +54,7 @@ class UpdateOrganisationTest extends TestCase
     /** @test */
     public function an_error_is_returned_if_the_updated_slug_is_already_registered()
     {
-        $response = $this->client->updateOrganisation($this->encode(1), [
+        $response = $this->client->updateOrganisation(1, [
             'slug' => 'citrium',
         ]);
 
