@@ -1,8 +1,8 @@
 <?php
 
-namespace Deviate\Activities\BookingPreconditions;
+namespace Deviate\Activities\Domain\BookingPreconditions;
 
-class PreconditionChecker
+class BookingPreconditionChecker
 {
     private $preconditions = [];
 

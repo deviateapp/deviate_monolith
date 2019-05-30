@@ -1,6 +1,6 @@
 <?php
 
-namespace Deviate\Activities\BookingPreconditions;
+namespace Deviate\Activities\Domain\BookingPreconditions;
 
 use Carbon\Carbon;
 use Deviate\Activities\Client\ActivitiesClientInterface;

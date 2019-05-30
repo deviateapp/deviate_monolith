@@ -2,7 +2,7 @@
 
 namespace Deviate\Activities\Services\Bookings;
 
-use Deviate\Activities\BookingPreconditions\PreconditionChecker;
+use Deviate\Activities\Domain\BookingPreconditions\BookingPreconditionChecker;
 use Deviate\Activities\Client\ActivitiesClientInterface;
 use Deviate\Activities\Contracts\Repositories\BookingsRepositoryInterface;
 use Deviate\Activities\Contracts\Services\Bookings\BookActivityInterface;
@@ -19,7 +19,7 @@ class BookActivity implements BookActivityInterface
         BookingsRepositoryInterface $bookingsRepository,
         FetchesUsersClientInterface $fetchesUsers,
         ActivitiesClientInterface $fetchesActivities,
-        PreconditionChecker $preconditionChecker
+        BookingPreconditionChecker $preconditionChecker
     ) {
         $this->bookingsRepository         = $bookingsRepository;
         $this->fetchesUsers               = $fetchesUsers;

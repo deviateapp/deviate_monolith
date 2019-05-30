@@ -1,11 +1,11 @@
 <?php
 
-namespace Deviate\Activities\BookingPreconditions;
+namespace Deviate\Activities\Domain\BookingPreconditions;
 
 use Deviate\Activities\Contracts\Repositories\BookingsRepositoryInterface;
-use Deviate\Activities\Exceptions\UserBookedOnActivityDuringSameTimeException;
+use Deviate\Activities\Exceptions\UserAlreadyBookedOnActivityException;
 
-class UserIsAvailable implements PreconditionInterface
+class UserNotAlreadyBooked implements PreconditionInterface
 {
     private $bookingsRepository;
 
@@ -16,7 +16,7 @@ class UserIsAvailable implements PreconditionInterface
 
     public function check(string $userId, string $activityId, bool $force = false): void
     {
-        $passes = $this->bookingsRepository->isFreeForActivity($userId, $activityId);
+        $passes = !$this->bookingsRepository->isUserBookedOnActivity($userId, $activityId);
 
         if (!$passes) {
             $this->throwException();
@@ -25,6 +25,6 @@ class UserIsAvailable implements PreconditionInterface
 
     public function throwException(): void
     {
-        throw new UserBookedOnActivityDuringSameTimeException;
+        throw new UserAlreadyBookedOnActivityException;
     }
 }

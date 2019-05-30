@@ -1,6 +1,6 @@
 <?php
 
-namespace Deviate\Activities\BookingPreconditions;
+namespace Deviate\Activities\Domain\BookingPreconditions;
 
 use Deviate\Activities\Client\ActivitiesClientInterface;
 use Deviate\Activities\Contracts\Repositories\InvitationsRepositoryInterface;
