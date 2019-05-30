@@ -1,0 +1,21 @@
+<?php
+
+namespace {{namespace}};
+
+use Deviate\Shared\Traits\ConvertsHashIds;
+use Deviate\Shared\Transformers\CanTransformSearchResults;
+use Deviate\Shared\Transformers\TransformerInterface;
+use Deviate\Shared\Transformers\TransformsCollections;
+use Illuminate\Database\Eloquent\Model;
+
+class {{classname}} implements TransformerInterface
+{
+    use ConvertsHashIds,
+        TransformsCollections,
+        CanTransformSearchResults;
+
+    public function transform(Model $model): array
+    {
+        return [];
+    }
+}

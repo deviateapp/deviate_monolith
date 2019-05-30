@@ -1,0 +1,10 @@
+<?php
+
+namespace {{interface_namespace}};
+
+use Deviate\Shared\Search\SearchContainerInterface;
+
+interface {{classname}}Interface
+{
+    public function search(SearchContainerInterface $search): array;
+}

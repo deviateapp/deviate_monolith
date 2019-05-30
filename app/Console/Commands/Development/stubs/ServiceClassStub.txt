@@ -1,0 +1,19 @@
+<?php
+
+namespace {{namespace}};
+
+use {{interface_namespace}}\{{classname}}Interface;
+use Deviate\Shared\Search\SearchContainerInterface;
+
+class {{classname}} implements {{classname}}Interface
+{
+    public function __construct()
+    {
+        //
+    }
+
+    public function search(SearchContainerInterface $search): array
+    {
+        // return $this->repository->search($this->normalizer->normalize($search));
+    }
+}
