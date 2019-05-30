@@ -26,10 +26,7 @@ class InvitationsRepository extends AbstractRepository implements InvitationsRep
     public function updateToBooked(int $userId, int $activityId): bool
     {
         return (bool) $this->invitation->newQuery()
-            ->where([
-                'activity_id' => $activityId,
-                'user_id'     => $userId,
-            ])
+            ->for($userId, $activityId)
             ->firstOrFail()
             ->update([
                 'status' => 'booked',
@@ -38,18 +35,12 @@ class InvitationsRepository extends AbstractRepository implements InvitationsRep
 
     public function uninviteUserFromActivity(int $userId, int $activityId): bool
     {
-        return $this->invitation->newQuery()->where([
-            'activity_id' => $activityId,
-            'user_id'     => $userId,
-        ])->delete();
+        return $this->invitation->newQuery()->for($userId, $activityId)->delete();
     }
 
     public function isUserInvitedToActivity(int $userId, int $activityId): bool
     {
-        return $this->invitation->newQuery()->where([
-            'activity_id' => $activityId,
-            'user_id'     => $userId,
-        ])->exists();
+        return $this->invitation->newQuery()->for($userId, $activityId)->exists();
     }
 
     public function listInvitedUsers(int $activityId): array

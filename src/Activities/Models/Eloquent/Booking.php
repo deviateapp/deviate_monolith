@@ -12,9 +12,6 @@ class Booking extends Model
     /** @var string */
     protected $table = 'activity_user';
 
-    /** @var null */
-    protected $primaryKey = null;
-
     /** @var array */
     protected $guarded = [];
 
@@ -35,18 +32,6 @@ class Booking extends Model
         static::addGlobalScope('booking', function (Builder $builder) {
             $builder->where('status', 'booked');
         });
-    }
-
-    /**
-     * Booking constructor.
-     *
-     * @param array $attributes
-     */
-    public function __construct(array $attributes = [])
-    {
-        $this->incrementing = false;
-
-        parent::__construct($attributes);
     }
 
     public function activity(): BelongsTo

@@ -3,15 +3,11 @@
 namespace Deviate\Activities\Models\Eloquent\Builders;
 
 use Deviate\Activities\Exceptions\InvitationNotFoundException;
-use Deviate\Shared\Traits\Models\StandardBuilderMethods;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Arr;
 
-class InvitationBuilder extends Builder
+class InvitationBuilder extends ActivityUserBuilder
 {
-    use StandardBuilderMethods;
-
     public function create(array $attributes = [])
     {
         return parent::create(

@@ -35,28 +35,20 @@ class BookingsRepository extends AbstractRepository implements BookingsRepositor
             return $this->invitationsRepository->updateToBooked($userId, $activityId);
         }
 
-        $this->booking->newQuery()->create([
+        return (bool) $this->booking->newQuery()->create([
             'activity_id' => $activityId,
             'user_id'     => $userId,
         ]);
-
-        return true;
     }
 
     public function unbookUserFromActivity(int $userId, int $activityId): bool
     {
-        return $this->booking->newQuery()->where([
-            'user_id'     => $userId,
-            'activity_id' => $activityId,
-        ])->delete();
+        return $this->booking->newQuery()->for($userId, $activityId)->delete();
     }
 
     public function isUserBookedOnActivity(int $userId, int $activityId): bool
     {
-        return $this->booking->newQuery()->where([
-            'activity_id' => $activityId,
-            'user_id'     => $userId,
-        ])->exists();
+        return $this->booking->newQuery()->for($userId, $activityId)->exists();
     }
 
     public function listBookedUsers(int $activityId): array

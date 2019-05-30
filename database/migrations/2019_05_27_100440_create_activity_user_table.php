@@ -14,6 +14,7 @@ class CreateActivityUserTable extends Migration
     public function up()
     {
         Schema::create('activity_user', function (Blueprint $table) {
+            $table->increments('id');
             $table->unsignedBigInteger('activity_id')->index();
             $table->unsignedBigInteger('user_id')->index();
             $table->string('status');
