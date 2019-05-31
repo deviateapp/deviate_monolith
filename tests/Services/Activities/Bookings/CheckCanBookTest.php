@@ -2,7 +2,6 @@
 
 namespace Deviate\Activities\Tests\Services\Bookings;
 
-use Deviate\Activities\Models\Eloquent\Activity;
 use Deviate\Activities\Models\Eloquent\ActivityCollection;
 use Deviate\Activities\Tests\Services\TestCase;
 

@@ -45,7 +45,7 @@ class UnbookActivity implements UnbookActivityInterface
         $result = $this->preconditionChecker->check($user->get('id'), $activity->get('id'), $force);
 
         return [
-            'can_unbook' => empty($result),
+            'can_unbook' => count($result) === 0,
             'reasons'    => $result,
         ];
     }

@@ -45,11 +45,9 @@ class BookActivity implements BookActivityInterface
 
         $result = $this->preconditionChecker->check($user->get('id'), $activity->get('id'), $force);
 
-        $response = [
-            'can_book' => empty($result),
+        return [
+            'can_book' => count($result) === 0,
             'reasons'  => $result,
         ];
-
-        return $response;
     }
 }

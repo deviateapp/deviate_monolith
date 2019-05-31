@@ -49,22 +49,51 @@ class ActivitiesServiceProvider extends ServiceProvider
 {
     public function register()
     {
+        $this->registerServices();
+        $this->registerRepositories();
+    }
+
+    private function registerServices()
+    {
+        $this->registerActivityCollectionServices();
+        $this->registerActivityServices();
+        $this->registerBookingServices();
+        $this->registerInvitationServices();
+    }
+
+    private function registerActivityCollectionServices()
+    {
         // Services
         $this->app->bind(FetchActivityCollectionInterface::class, FetchActivityCollection::class);
         $this->app->bind(CreateActivityCollectionInterface::class, CreateActivityCollection::class);
         $this->app->bind(DeleteActivityCollectionInterface::class, DeleteActivityCollection::class);
         $this->app->bind(UpdateActivityCollectionInterface::class, UpdateActivityCollection::class);
+    }
+
+    private function registerActivityServices()
+    {
         $this->app->bind(FetchActivityInterface::class, FetchActivity::class);
         $this->app->bind(CreateActivityInterface::class, CreateActivity::class);
         $this->app->bind(UpdateActivityInterface::class, UpdateActivity::class);
         $this->app->bind(DeleteActivityInterface::class, DeleteActivity::class);
+    }
+
+    private function registerBookingServices()
+    {
         $this->app->bind(BookActivityInterface::class, BookActivity::class);
         $this->app->bind(UnbookActivityInterface::class, UnbookActivity::class);
         $this->app->bind(SearchesBookingsInterface::class, SearchesBookings::class);
+    }
+
+    private function registerInvitationServices()
+    {
         $this->app->bind(InviteUserInterface::class, InviteUser::class);
         $this->app->bind(UninviteUserInterface::class, UninviteUser::class);
         $this->app->bind(SearchInvitationsInterface::class, SearchInvitations::class);
+    }
 
+    private function registerRepositories()
+    {
         // Repositories
         $this->app->bind(ActivityCollectionsRepositoryInterface::class, ActivityCollectionsRepository::class);
         $this->app->bind(ActivitiesRepositoryInterface::class, ActivitiesRepository::class);
