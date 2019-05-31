@@ -4,11 +4,11 @@ namespace Deviate\Activities\Services\Invitations;
 
 use Deviate\Activities\Client\ActivitiesClientInterface;
 use Deviate\Activities\Contracts\Repositories\InvitationsRepositoryInterface;
-use Deviate\Activities\Contracts\Services\Invitations\InviteUserInterface;
-use Deviate\Activities\Domain\BookingPreconditions\InvitePreconditionChecker;
+use Deviate\Activities\Contracts\Services\Invitations\UninviteUserInterface;
+use Deviate\Activities\Domain\BookingPreconditions\UninvitePreconditionChecker;
 use Deviate\Users\Client\FetchesUsersClientInterface;
 
-class InviteUser implements InviteUserInterface
+class UninviteUser implements UninviteUserInterface
 {
     private $invitationRepository;
     private $fetchesUsers;
@@ -19,7 +19,7 @@ class InviteUser implements InviteUserInterface
         InvitationsRepositoryInterface $invitationRepository,
         FetchesUsersClientInterface $fetchesUsers,
         ActivitiesClientInterface $fetchesActivities,
-        InvitePreconditionChecker $preconditionChecker
+        UninvitePreconditionChecker $preconditionChecker
     ) {
         $this->invitationRepository = $invitationRepository;
         $this->fetchesUsers         = $fetchesUsers;
@@ -27,13 +27,13 @@ class InviteUser implements InviteUserInterface
         $this->preconditionChecker  = $preconditionChecker;
     }
 
-    public function inviteUserToActivity(int $userId, int $activityId): void
+    public function uninviteUserFromActivity(int $userId, int $activityId): void
     {
         $user     = $this->fetchesUsers->fetchUserById($userId)->rethrow();
         $activity = $this->fetchesActivities->fetchById($activityId)->rethrow();
 
         $this->preconditionChecker->run($user->get('id'), $activity->get('id'), false);
 
-        $this->invitationRepository->inviteUserToActivity($userId, $activityId);
+        $this->invitationRepository->uninviteUserFromActivity($userId, $activityId);
     }
 }

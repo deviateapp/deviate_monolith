@@ -18,6 +18,8 @@ use Deviate\Activities\Contracts\Services\Bookings\BookActivityInterface;
 use Deviate\Activities\Contracts\Services\Bookings\SearchesBookingsInterface;
 use Deviate\Activities\Contracts\Services\Bookings\UnbookActivityInterface;
 use Deviate\Activities\Contracts\Services\Invitations\InviteUserInterface;
+use Deviate\Activities\Contracts\Services\Invitations\SearchInvitationsInterface;
+use Deviate\Activities\Contracts\Services\Invitations\UninviteUserInterface;
 use Deviate\Activities\Events\ActivitiesEventSubscriber;
 use Deviate\Activities\Events\BookingsEventSubscriber;
 use Deviate\Activities\Events\CollectionsEventSubscriber;
@@ -38,6 +40,8 @@ use Deviate\Activities\Services\Bookings\BookActivity;
 use Deviate\Activities\Services\Bookings\SearchesBookings;
 use Deviate\Activities\Services\Bookings\UnbookActivity;
 use Deviate\Activities\Services\Invitations\InviteUser;
+use Deviate\Activities\Services\Invitations\SearchInvitations;
+use Deviate\Activities\Services\Invitations\UninviteUser;
 use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Support\ServiceProvider;
 
@@ -58,6 +62,8 @@ class ActivitiesServiceProvider extends ServiceProvider
         $this->app->bind(UnbookActivityInterface::class, UnbookActivity::class);
         $this->app->bind(SearchesBookingsInterface::class, SearchesBookings::class);
         $this->app->bind(InviteUserInterface::class, InviteUser::class);
+        $this->app->bind(UninviteUserInterface::class, UninviteUser::class);
+        $this->app->bind(SearchInvitationsInterface::class, SearchInvitations::class);
 
         // Repositories
         $this->app->bind(ActivityCollectionsRepositoryInterface::class, ActivityCollectionsRepository::class);

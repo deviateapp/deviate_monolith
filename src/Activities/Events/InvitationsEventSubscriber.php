@@ -4,6 +4,8 @@ namespace Deviate\Activities\Events;
 
 use Deviate\Activities\Contracts\Events\InvitationsEventSubscriberInterface;
 use Deviate\Activities\Contracts\Services\Invitations\InviteUserInterface;
+use Deviate\Activities\Contracts\Services\Invitations\UninviteUserInterface;
+use Deviate\Activities\Contracts\Services\Invitations\SearchInvitationsInterface;
 use Deviate\Shared\Events\AbstractEventSubscriber;
 
 class InvitationsEventSubscriber extends AbstractEventSubscriber implements InvitationsEventSubscriberInterface
@@ -16,10 +18,17 @@ class InvitationsEventSubscriber extends AbstractEventSubscriber implements Invi
     ];
 
     private $invitesUsers;
+    private $uninvitesUsers;
+    private $searchesInvitations;
 
-    public function __construct(InviteUserInterface $invitesUsers)
-    {
-        $this->invitesUsers = $invitesUsers;
+    public function __construct(
+        InviteUserInterface $invitesUsers,
+        UninviteUserInterface $uninvitesUsers,
+        SearchInvitationsInterface $searchesInvitations
+    ) {
+        $this->invitesUsers        = $invitesUsers;
+        $this->uninvitesUsers      = $uninvitesUsers;
+        $this->searchesInvitations = $searchesInvitations;
     }
 
     public function handleInvite(array $payload): void
@@ -29,16 +38,16 @@ class InvitationsEventSubscriber extends AbstractEventSubscriber implements Invi
 
     public function handleUninvite(array $payload): void
     {
-        // TODO: Implement handleUninvite() method.
+        $this->uninvitesUsers->uninviteUserFromActivity($payload['user_id'], $payload['activity_id']);
     }
 
     public function handleListInvites(array $payload): array
     {
-        // TODO: Implement handleListInvites() method.
+
     }
 
     public function handleListInvitedUsers(array $payload): array
     {
-        // TODO: Implement handleListInvitedUsers() method.
+        return $this->searchesInvitations->listInvites($payload['activity_id'], unserialize($payload['parameters']));
     }
 }

@@ -8,6 +8,7 @@ use Deviate\Activities\Client\InvitationsClientInterface;
 use Deviate\Activities\Client\CollectionsClientInterface;
 use Deviate\Activities\Client\SearchBookingsClientInterface;
 use Deviate\Activities\Client\SearchClientInterface;
+use Deviate\Activities\Client\SearchInvitationsClientInterface;
 use Tests\TestCase as BaseTestCase;
 
 class TestCase extends BaseTestCase
@@ -30,15 +31,19 @@ class TestCase extends BaseTestCase
     /** @var InvitationsClientInterface */
     protected $invitationsClient;
 
+    /** @var SearchInvitationsClientInterface */
+    protected $searchInvitationsClient;
+
     protected function setUp(): void
     {
         parent::setUp();
 
-        $this->collectionsClient    = app(CollectionsClientInterface::class);
-        $this->searchClient         = app(SearchClientInterface::class);
-        $this->activitiesClient     = app(ActivitiesClientInterface::class);
-        $this->bookingsClient       = app(BookingsClientInterface::class);
-        $this->searchBookingsClient = app(SearchBookingsClientInterface::class);
-        $this->invitationsClient    = app(InvitationsClientInterface::class);
+        $this->collectionsClient       = app(CollectionsClientInterface::class);
+        $this->searchClient            = app(SearchClientInterface::class);
+        $this->activitiesClient        = app(ActivitiesClientInterface::class);
+        $this->bookingsClient          = app(BookingsClientInterface::class);
+        $this->searchBookingsClient    = app(SearchBookingsClientInterface::class);
+        $this->invitationsClient       = app(InvitationsClientInterface::class);
+        $this->searchInvitationsClient = app(SearchInvitationsClientInterface::class);
     }
 }

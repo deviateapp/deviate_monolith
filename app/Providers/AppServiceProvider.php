@@ -65,5 +65,6 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(Activities\BookingsClientInterface::class, Activities\BookingsClient::class);
         $this->app->bind(Activities\SearchBookingsClientInterface::class, Activities\SearchBookingsClient::class);
         $this->app->bind(Activities\InvitationsClientInterface::class, Activities\InvitationsClient::class);
+        $this->app->bind(Activities\SearchInvitationsClientInterface::class, Activities\SearchInvitationsClient::class);
     }
 }

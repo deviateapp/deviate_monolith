@@ -1,6 +1,6 @@
 <?php
 
-namespace Deviate\Activities\Tests\Invites;
+namespace Deviate\Activities\Tests\Services\Invites;
 
 use Deviate\Activities\Tests\Services\TestCase;
 use Illuminate\Support\Facades\DB;
@@ -50,6 +50,24 @@ class InviteToActivityTest extends TestCase
             'activity_id' => 1,
             'user_id'     => 1,
             'status'      => 'invited',
+            'created_at'  => now()->format('Y-m-d H:i:s'),
+            'updated_at'  => now()->format('Y-m-d H:i:s'),
+        ]);
+
+        $response = $this->invitationsClient->invite(1, 1);
+
+        $response->assertException([
+            'status' => 400,
+        ]);
+    }
+
+    /** @test */
+    public function an_error_is_returned_if_trying_to_invite_an_already_booked_user()
+    {
+        DB::table('activity_user')->insert([
+            'activity_id' => 1,
+            'user_id'     => 1,
+            'status'      => 'booked',
             'created_at'  => now()->format('Y-m-d H:i:s'),
             'updated_at'  => now()->format('Y-m-d H:i:s'),
         ]);
