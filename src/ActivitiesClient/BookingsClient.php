@@ -24,4 +24,22 @@ class BookingsClient extends AbstractClient implements BookingsClientInterface
             'force_unbooking' => $force,
         ]);
     }
+
+    public function canBook(int $userId, int $activityId, bool $force = false): ApiResponseInterface
+    {
+        return $this->call('activities.bookings.can_book', [
+            'user_id'            => $userId,
+            'activity_id'        => $activityId,
+            'with_force_booking' => $force,
+        ]);
+    }
+
+    public function canUnbook(int $userId, int $activityId, bool $force = false): ApiResponseInterface
+    {
+        return $this->call('activities.bookings.can_unbook', [
+            'user_id'              => $userId,
+            'activity_id'          => $activityId,
+            'with_force_unbooking' => $force,
+        ]);
+    }
 }

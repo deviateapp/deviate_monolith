@@ -15,6 +15,8 @@ class BookingsEventSubscriber extends AbstractEventSubscriber implements Booking
         'activities.unbook'                              => 'handleUnbook',
         'activities.bookings.search.users_on_activity'   => 'handleListBookedUsers',
         'activities.bookings.search.activities_for_user' => 'handleListActivitiesBooked',
+        'activities.bookings.can_book'                   => 'handleCheckCanBook',
+        'activities.bookings.can_unbook'                 => 'handleCheckCanUnbook',
     ];
 
     private $booksActivities;
@@ -57,5 +59,23 @@ class BookingsEventSubscriber extends AbstractEventSubscriber implements Booking
     public function handleListActivitiesBooked(array $payload): array
     {
         return $this->searchesBookings->listActivitiesBooked($payload['user_id'], unserialize($payload['parameters']));
+    }
+
+    public function handleCheckCanBook(array $payload): array
+    {
+        return $this->booksActivities->canBookUserOnActivity(
+            $payload['user_id'],
+            $payload['activity_id'],
+            $payload['with_force_booking']
+        );
+    }
+
+    public function handleCheckCanUnbook(array $payload): array
+    {
+        return $this->unbooksActivities->canUnbookUserFromActivity(
+            $payload['user_id'],
+            $payload['activity_id'],
+            $payload['with_force_unbooking']
+        );
     }
 }

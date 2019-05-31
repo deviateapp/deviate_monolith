@@ -8,25 +8,32 @@ use Deviate\Activities\Contracts\Services\Invitations\SearchInvitationsInterface
 use Deviate\Shared\Search\Filters\MustBeIn;
 use Deviate\Shared\Search\SearchContainerInterface;
 use Deviate\Users\Client\FetchesUsersClientInterface;
-use Deviate\Users\Client\SearchClientInterface;
+use Deviate\Users\Client\SearchClientInterface as SearchUsersClientInterface;
+use Deviate\Activities\Client\SearchClientInterface as SearchActivitiesClientInterface;
 
 class SearchInvitations implements SearchInvitationsInterface
 {
     private $fetchesActivities;
     private $invitationsRepository;
+    private $fetchesUsers;
     private $searchesUsers;
+    private $searchesActivities;
 
     public function __construct(
         ActivitiesRepositoryInterface $fetchesActivities,
         InvitationsRepositoryInterface $invitationsRepository,
-        SearchClientInterface $searchesUsers
+        FetchesUsersClientInterface $fetchesUsers,
+        SearchUsersClientInterface $searchesUsers,
+        SearchActivitiesClientInterface $searchesActivities
     ) {
         $this->fetchesActivities     = $fetchesActivities;
         $this->invitationsRepository = $invitationsRepository;
+        $this->fetchesUsers          = $fetchesUsers;
         $this->searchesUsers         = $searchesUsers;
+        $this->searchesActivities    = $searchesActivities;
     }
 
-    public function listInvites(int $activityId, SearchContainerInterface $search): array
+    public function listInvitedUsers(int $activityId, SearchContainerInterface $search): array
     {
         $this->fetchesActivities->fetchById($activityId);
 
@@ -35,5 +42,16 @@ class SearchInvitations implements SearchInvitationsInterface
         $search->addFilter(new MustBeIn('id', $invites));
 
         return $this->searchesUsers->search($search)->toArray();
+    }
+
+    public function listInvitedActivities(int $userId, SearchContainerInterface $search): array
+    {
+        $this->fetchesUsers->fetchUserById($userId)->rethrow();
+
+        $invites = $this->invitationsRepository->listActivitiesInvitedTo($userId);
+
+        $search->addFilter(new MustBeIn('id', $invites));
+
+        return $this->searchesActivities->searchActivities($search)->toArray();
     }
 }

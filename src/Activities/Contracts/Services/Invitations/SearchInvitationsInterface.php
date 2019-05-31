@@ -6,5 +6,6 @@ use Deviate\Shared\Search\SearchContainerInterface;
 
 interface SearchInvitationsInterface
 {
-    public function listInvites(int $activityId, SearchContainerInterface $search): array;
+    public function listInvitedUsers(int $activityId, SearchContainerInterface $search): array;
+    public function listInvitedActivities(int $userId, SearchContainerInterface $search): array;
 }

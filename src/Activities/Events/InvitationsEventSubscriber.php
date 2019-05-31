@@ -43,11 +43,11 @@ class InvitationsEventSubscriber extends AbstractEventSubscriber implements Invi
 
     public function handleListInvites(array $payload): array
     {
-
+        return $this->searchesInvitations->listInvitedActivities($payload['user_id'], unserialize($payload['parameters']));
     }
 
     public function handleListInvitedUsers(array $payload): array
     {
-        return $this->searchesInvitations->listInvites($payload['activity_id'], unserialize($payload['parameters']));
+        return $this->searchesInvitations->listInvitedUsers($payload['activity_id'], unserialize($payload['parameters']));
     }
 }

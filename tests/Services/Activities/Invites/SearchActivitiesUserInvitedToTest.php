@@ -6,10 +6,10 @@ use Deviate\Activities\Models\Eloquent\Invitation;
 use Deviate\Activities\Tests\Services\TestCase;
 use Deviate\Shared\Search\SearchContainer;
 
-class SearchInvitedUsersToActivityTest extends TestCase
+class SearchActivitiesUserInvitedToTest extends TestCase
 {
     /** @test */
-    public function it_can_return_a_list_of_users_invited_to_an_activity()
+    public function it_can_return_a_list_of_activities_a_user_has_been_invited_to()
     {
         Invitation::create([
             'activity_id' => 1,
@@ -19,7 +19,7 @@ class SearchInvitedUsersToActivityTest extends TestCase
         $container = new SearchContainer;
         $container->perPage(5)->forPage(1);
 
-        $response = $this->searchInvitationsClient->listInvitedUsers(1, $container);
+        $response = $this->searchInvitationsClient->listInvitedActivities(1, $container);
 
         $response->assertSuccessful();
 
@@ -33,9 +33,9 @@ class SearchInvitedUsersToActivityTest extends TestCase
     }
 
     /** @test */
-    public function it_returns_an_error_if_the_activity_cant_be_found()
+    public function it_returns_an_error_if_the_user_cant_be_found()
     {
-        $response = $this->searchInvitationsClient->listInvitedUsers(999, new SearchContainer);
+        $response = $this->searchInvitationsClient->listInvitedActivities(999, new SearchContainer);
 
         $response->assertException([
             'status' => 404,

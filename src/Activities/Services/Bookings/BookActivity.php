@@ -21,9 +21,9 @@ class BookActivity implements BookActivityInterface
         ActivitiesClientInterface $fetchesActivities,
         BookingPreconditionChecker $preconditionChecker
     ) {
-        $this->bookingsRepository         = $bookingsRepository;
-        $this->fetchesUsers               = $fetchesUsers;
-        $this->fetchesActivities          = $fetchesActivities;
+        $this->bookingsRepository = $bookingsRepository;
+        $this->fetchesUsers       = $fetchesUsers;
+        $this->fetchesActivities  = $fetchesActivities;
 
         $this->preconditionChecker = $preconditionChecker;
     }
@@ -36,5 +36,20 @@ class BookActivity implements BookActivityInterface
         $this->preconditionChecker->run($user->get('id'), $activity->get('id'), $force);
 
         $this->bookingsRepository->bookUserOnActivity($userId, $activityId);
+    }
+
+    public function canBookUserOnActivity(int $userId, int $activityId, bool $force): array
+    {
+        $user     = $this->fetchesUsers->fetchUserById($userId)->rethrow();
+        $activity = $this->fetchesActivities->fetchById($activityId)->rethrow();
+
+        $result = $this->preconditionChecker->check($user->get('id'), $activity->get('id'), $force);
+
+        $response = [
+            'can_book' => empty($result),
+            'reasons'  => $result,
+        ];
+
+        return $response;
     }
 }

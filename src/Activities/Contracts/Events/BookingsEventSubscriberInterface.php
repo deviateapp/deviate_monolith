@@ -10,4 +10,6 @@ interface BookingsEventSubscriberInterface extends EventSubscriberInterface
     public function handleUnbook(array $payload): void;
     public function handleListBookedUsers(array $payload): array;
     public function handleListActivitiesBooked(array $payload): array;
+    public function handleCheckCanBook(array $payload): array;
+    public function handleCheckCanUnbook(array $payload): array;
 }

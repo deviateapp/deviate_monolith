@@ -36,4 +36,17 @@ class UnbookActivity implements UnbookActivityInterface
 
         $this->bookingsRepository->unbookUserFromActivity($userId, $activityId);
     }
+
+    public function canUnbookUserFromActivity(int $userId, int $activityId, bool $force = false): array
+    {
+        $user     = $this->fetchesUsers->fetchUserById($userId)->rethrow();
+        $activity = $this->fetchesActivities->fetchById($activityId)->rethrow();
+
+        $result = $this->preconditionChecker->check($user->get('id'), $activity->get('id'), $force);
+
+        return [
+            'can_unbook' => empty($result),
+            'reasons'    => $result,
+        ];
+    }
 }
