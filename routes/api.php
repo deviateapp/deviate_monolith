@@ -1,6 +1,5 @@
 <?php
 
-use Deviate\Users\Client\FetchesUsersClientInterface;
 use Illuminate\Http\Request;
 
 /*
@@ -13,10 +12,6 @@ use Illuminate\Http\Request;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-
-Route::get('/users/{userId}', function (FetchesUsersClientInterface $users, $userId) {
-    return $users->fetchUserById($userId)->toArray();
-});
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();

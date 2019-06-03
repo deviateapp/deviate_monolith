@@ -3,9 +3,11 @@
 namespace Deviate\Shared\Exceptions;
 
 use Exception;
+use Illuminate\Contracts\Support\Responsable;
+use Illuminate\Http\JsonResponse;
 use Ramsey\Uuid\Uuid;
 
-abstract class AbstractApiException extends Exception
+abstract class AbstractApiException extends Exception implements Responsable
 {
     /** @var string */
     protected $id;
@@ -35,6 +37,11 @@ abstract class AbstractApiException extends Exception
     protected function getMeta(): ?array
     {
         return $this->errors;
+    }
+
+    public function toResponse($request)
+    {
+        return new JsonResponse($this->toArray(), $this->getHttpStatus());
     }
 
     abstract protected function getInternalCode(): int;

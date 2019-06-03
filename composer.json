@@ -37,6 +37,7 @@
     "autoload": {
         "psr-4": {
             "App\\": "app/",
+            "Deviate\\Gateway\\": "src/Gateway/",
             "Deviate\\Shared\\": "src/Shared/",
 
             "Deviate\\Organisations\\Client\\": "src/OrganisationsClient/",
