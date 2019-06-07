@@ -2,26 +2,9 @@
 
 namespace Deviate\Gateway\Shared\JsonObjects\Schemas;
 
-use Deviate\Shared\Responses\Clients\ApiResponse;
-
-class OrganisationSchema
+class OrganisationSchema extends AbstractSchema
 {
-    private $response;
-
-    public function __construct(ApiResponse $response)
-    {
-        $this->response = $response;
-    }
-
-    public function getId()
-    {
-        return $this->response->get('id');
-    }
-
-    public function getType()
-    {
-        return 'organisation';
-    }
+    protected $type = 'organisation';
 
     public function toArray()
     {

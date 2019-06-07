@@ -20,30 +20,58 @@ class RegistrationTest extends TestCase
         $response->assertSuccessful();
 
         $response->assertJson([
-            'data' => [
-                'user' => [
-                    'id' => 8,
-                    'name' => [
-                        'forename' => 'Lindsey',
-                        'surname'  => 'Cross'
+            "links" => [],
+            "data" => [
+                "type" => "user",
+                "id" => 8,
+                "attributes" => [
+                    "name" => [
+                        "forename" => "Lindsey",
+                        "surname" => "Cross",
+                        "full_name" => "Lindsey Cross",
                     ],
-                    'email' => 'lindsey@deviate.test',
-                    'dates' => [
-                        'created_at' => now()->format('Y-m-d H:i:s'),
-                        'updated_at' => now()->format('Y-m-d H:i:s'),
-                        'disabled_at' => null,
+                    "contact" => [
+                        "email" => "lindsey@deviate.test",
+                    ],
+                    "status" => "active",
+                    "dates" => [
+                        "created_at" => now()->format('Y-m-d H:i:s'),
+                        "updated_at" => now()->format('Y-m-d H:i:s'),
+                        "disabled_at" => null,
                     ],
                 ],
-                'organisation' => [
-                    'id' => 3,
-                    'name' => 'Test Organisation',
-                    'slug' => 'test-organisation',
-                    'dates' => [
-                        'created_at' => now()->format('Y-m-d H:i:s'),
-                        'updated_at' => now()->format('Y-m-d H:i:s'),
+                "links" => [],
+                "relationships" => [
+                    "organisation" => [
+                        "data" => [
+                            "type" => "organisation",
+                            "id" => 3,
+                        ],
+                        "links" => [],
                     ],
+                ],
+                "meta" => [],
+            ],
+            "includes" => [
+                [
+                    "type" => "organisation",
+                    "id" => 3,
+                    "attributes" => [
+                        "name" => [
+                            "title" => "Test Organisation",
+                            "slug" => "test-organisation",
+                        ],
+                        "dates" => [
+                            "created_at" => now()->format('Y-m-d H:i:s'),
+                            "updated_at" => now()->format('Y-m-d H:i:s'),
+                        ],
+                    ],
+                    "links" => [],
+                    "relationships" => [],
+                    "meta" => [],
                 ],
             ],
+            "meta" => [],
         ]);
     }
 }

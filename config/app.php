@@ -165,6 +165,7 @@ return [
         /*
          * Package Service Providers...
          */
+        Deviate\Gateway\GatewayServiceProvider::class,
         Deviate\Gateway\Registration\RegistrationServiceProvider::class,
         Deviate\Organisations\OrganisationsServiceProvider::class,
         Deviate\Users\UsersServiceProvider::class,

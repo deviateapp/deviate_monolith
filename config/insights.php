@@ -77,7 +77,7 @@ return [
     ],
 
     'exclude' => [
-        'app/Console/Commands/Development'
+        'app/Console/Commands/Development',
     ],
 
     'config' => [

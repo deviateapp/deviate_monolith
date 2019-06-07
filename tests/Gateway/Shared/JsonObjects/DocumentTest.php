@@ -252,12 +252,12 @@ class DocumentTest extends TestCase
             'related' => 'https://deviate.test/api/organisations',
         ]);
 
-        $document->addLink('root', 'https://deviate.test/api');
+        $document->addLink('base', 'https://deviate.test/api');
 
         $this->assertEquals([
             'self' => 'https://deviate.test/api/organisations/1',
             'related' => 'https://deviate.test/api/organisations',
-            'root' => 'https://deviate.test/api',
+            'base' => 'https://deviate.test/api',
         ], $document->toArray()['links']);
     }
 }

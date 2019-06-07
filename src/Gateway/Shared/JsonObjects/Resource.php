@@ -2,15 +2,44 @@
 
 namespace Deviate\Gateway\Shared\JsonObjects;
 
-use Illuminate\Contracts\Support\Arrayable;
+use Deviate\Gateway\Shared\JsonObjects\Relationships\RelationshipCollection;
+use Deviate\Gateway\Shared\JsonObjects\Relationships\RelationshipInterface;
+use Deviate\Gateway\Shared\JsonObjects\Schemas\SchemaInterface;
 
-class Resource implements Arrayable
+class Resource implements ResourceInterface
 {
     private $schema;
+    private $links;
+    private $meta;
+    private $relationships;
 
-    public function __construct($schema)
+    public function __construct(SchemaInterface $schema)
     {
-        $this->schema = $schema;
+        $this->schema        = $schema;
+        $this->links         = new LinkCollection;
+        $this->meta          = new MetaCollection;
+        $this->relationships = $schema->defaultRelationships();
+    }
+
+    public function addLink($type, $url = null): ResourceInterface
+    {
+        $this->links->add($type, $url);
+
+        return $this;
+    }
+
+    public function addMeta($key, $value = null): ResourceInterface
+    {
+        $this->meta->add($key, $value);
+
+        return $this;
+    }
+
+    public function addRelationship(RelationshipInterface $relationship): ResourceInterface
+    {
+        $this->relationships->push($relationship);
+
+        return $this;
     }
 
     public function toArray()
@@ -19,9 +48,9 @@ class Resource implements Arrayable
             'type'          => $this->schema->getType(),
             'id'            => $this->schema->getId(),
             'attributes'    => $this->schema->toArray(),
-            'links'         => [],
-            'relationships' => [],
-            'meta'          => [],
+            'links'         => $this->links->toArray(),
+            'relationships' => $this->relationships->toArray(),
+            'meta'          => $this->meta->toArray(),
         ];
     }
 }

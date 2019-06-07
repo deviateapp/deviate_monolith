@@ -3,7 +3,6 @@
 namespace Deviate\Shared\Exceptions;
 
 use Deviate\Shared\Responses\Clients\ApiErrorResponse;
-use Illuminate\Contracts\Support\Responsable;
 
 class ApiException extends AbstractApiException
 {

@@ -6,13 +6,15 @@ class Document
 {
     private $resource;
     private $includes;
-    private $meta = [];
-    private $links = [];
+    private $meta;
+    private $links;
 
     public function __construct($resource = null)
     {
         $this->resource = $resource;
         $this->includes = new ResourceCollection;
+        $this->links    = new LinkCollection;
+        $this->meta     = new MetaCollection;
     }
 
     public function addInclude($resource): Document
@@ -30,22 +32,14 @@ class Document
 
     public function addMeta($key, $value = null)
     {
-        if (is_array($key)) {
-            $this->meta = array_merge($this->meta, $key);
-        } else {
-            $this->meta[$key] = $value;
-        }
+        $this->meta->add($key, $value);
 
         return $this;
     }
 
     public function addLink($key, $value = null)
     {
-        if (is_array($key)) {
-            $this->links = array_merge($this->links, $key);
-        } else {
-            $this->links[$key] = $value;
-        }
+        $this->links->add($key, $value);
 
         return $this;
     }
@@ -63,10 +57,10 @@ class Document
     public function toArray()
     {
         return [
-            'links'    => $this->links,
+            'links'    => $this->links->toArray(),
             'data'     => $this->resource ? $this->resource->toArray() : [],
             'includes' => $this->getIncludes()->toArray(),
-            'meta'     => $this->meta,
+            'meta'     => $this->meta->toArray(),
         ];
     }
 }
